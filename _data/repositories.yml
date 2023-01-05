@@ -1,12 +1,10 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - wonbeomjang
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - wonbeomjang/mobile-hair-segmentation-pytorch
+  - wonbeomjang/ESRGAN-pytorch
+  - wonbeomjang/yolov5-knowledge-distillation
+  - wonbeomjang/gripp-deep
+  - osamhack2021/AI_APP_WEB_Canary_Canary_2021
+  - wonbeomjang/Knowledge-Distilling-PyTorch

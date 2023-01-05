@@ -2,24 +2,27 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: Computer Vision Researcher and Engineer
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic.jpeg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>jtiger958@gmail.com</p>
+
+[//]: # (    <p>Your City, State 12345</p>)
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+안녕하세요.
+개발을 좋아하는 컴퓨터비전 리서처 장원범입니다.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+그저 컴퓨터를 좋아하는 소년이 블록깨기 인공지능에 빠져 공부를 시작했고 전공과 관심사가 겹쳐져서 컴퓨터비전을 활용한 다양한 토이프로젝트를 하면 학창시절을 보냈습니다.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+데이터와 사용 디바이스를 이해하며 연구개발을 하자라는 것을 목표로하며 실제 사용할 수 있는 서비스를 만들기 위해 리서치와 개발을 둘 다 구분없이 역량을 키우고 있습니다.
+
+현재 컴퓨터비전 리서치를 하고 있으며 Pytorch, OpenCV, Docker 등을 사용합니다.

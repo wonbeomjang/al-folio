@@ -1,11 +1,11 @@
 ---
 layout: page
-title: projects
+title: Projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: 그 동안 수행했던 프로젝트입니다.
 nav: true
 nav_order: 2
-display_categories: [work, fun]
+display_categories: [toy-project]
 horizontal: false
 ---
 
