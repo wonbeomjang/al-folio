@@ -22,7 +22,7 @@ Google Cloud Vision적용 및 핵심알고리즘 개발
 Recall 2%p, Precision 1%p 향상 
 
 **링크**  
-[https://wonbeomjang.github.io/al-folio/blog/2020/barrier-free/](https://wonbeomjang.github.io/al-folio/blog/2020/barrier-free/)
+[https://wonbeomjang.github.io/blog/2020/barrier-free/](https://wonbeomjang.github.io/blog/2020/barrier-free/)
 [https://www.autoeverapp.kr/bbs/board.php?bo_table=B06R](https://www.autoeverapp.kr/bbs/board.php?bo_table=B06R)  
 
 **내용**  
