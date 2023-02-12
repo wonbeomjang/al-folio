@@ -4,7 +4,6 @@ title:  "Jetson nano Ubuntu 20.04 (우분투 20.04) 설치"
 date:   2023-02-12 18:50:11 +0900
 description: pytorch 1.13을 향하여
 categories: [jetson-nano]
-giscus_comments: true
 ---
 <p align="center"><img src="https://user-images.githubusercontent.com/40621030/218313011-068d00e2-58fe-4cdf-bc2d-25496037be36.png" width="60%"></p>
 
