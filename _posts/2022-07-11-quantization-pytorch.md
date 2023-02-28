@@ -173,13 +173,13 @@ epoch 5, image size 224, optimzer Adam을 사용하였다.
     <tr align="center">
         <td>ResNet</td>
         <td>98.79</td>
-        <td>33</td>
+        <td>66</td>
         <td>46.31</td>
     </tr>
     <tr align="center">
         <td>Quantizable ResNet</td>
         <td>96.42</td>
-        <td>66</td>
+        <td>33</td>
         <td>11.69</td>
     </tr>
 </table>

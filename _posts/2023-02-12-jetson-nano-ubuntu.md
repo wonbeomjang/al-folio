@@ -16,14 +16,14 @@ Jetson nano로 프로젝트를 하다가 pytorch 1.10 이상이 필요해서 우
 
 공식버전(18.04)을 받고 싶으면 아래 링크를 통해 다운로드 받으면 된다.
 
-https://developer.nvidia.com/embedded/downloads
+[https://developer.nvidia.com/embedded/downloads](https://developer.nvidia.com/embedded/downloads)
 
 <p align="center"><img src="https://user-images.githubusercontent.com/40621030/218313311-e92e3bf9-32c8-4b90-bcc3-36df2a53e81e.png" width="60%"></p>
 
 우분투 20.04를 받고 싶으면 아래 링크에서 받으면 후 압축을 풀면 된다.
 다운로드 속도 때문에 분리되어있는 압축파일을 다움받는 것을 추천한다.
 
-https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image
+[https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image](https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image)
 
 <p align="center"><img src="https://user-images.githubusercontent.com/40621030/218314700-765e1f41-bca4-45f7-8841-4b106a20cafb.png" width="60%"></p>
 
