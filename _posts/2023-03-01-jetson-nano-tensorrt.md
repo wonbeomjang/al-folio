@@ -3,7 +3,7 @@ layout: post
 title:  "Jetson Nano Tensorrt 적용"
 date:   2023-03-01 00:00:11 +0900
 description: pytorch to tensorrt using onnx
-categories: [jetson-nano, tensorrt]
+categories: [jetson-nano, tensorrt, hardware-optimization]
 ---
 
 이전에 RTX2070에 TenssorRT를 적용했던 것처럼 jetson nano에서도 tensorrt를 적용하고 싶었고 호환성에 애를먹다가 성공했다.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Pytorch Quantization 적용"
 date:   2022-07-11 18:50:11 +0900
-categories: [Pytorch, Optimization]
+categories: [pytorch, hardware-optimization]
 comments: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title:  "Quantization과 inference speed"
 date:   2022-07-13 18:50:11 +0900
 description: Quantization 성능분석
-categories: [Pytorch, Optimization]
+categories: [pytorch, hardware-optimization]
 giscus_comments: false
 ---
 Quantization은 precision reduction으로 parameter의 용량을 줄이기위해 나왔다.

@@ -2,7 +2,7 @@
 layout: post
 title:  "[네트워크 경량화] EfficientNet"
 date:   2021-01-03 16:41:11 +0900
-categories: [Computer Vision, Light Weight]
+categories: [backbone, paper]
 comments: true
 ---
 
