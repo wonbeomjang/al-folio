@@ -10,6 +10,21 @@
     - name: email
       value: jtiger958@gmail.com
 
+- title: Career
+  type: time_table
+  contents:
+    - title: 뉴로클 리서치 엔지니어
+      year: 2023.01-
+      description:
+        - 성능 향상을 위한 실험 진행
+        - 연구 플랫폼 제작
+    - title: 중앙대학교 CVML lab 학부연구생
+      year: 2018.06-2021.08
+      description:
+        - DPSGAN 실험 지원 및 평가
+        - MDADN 경량화 실험 지원
+
+
 - title: paper
   type: time_table
   contents:
@@ -38,9 +53,9 @@
         - title: 카나리아 - 군내 사진사용을 위한 자동 모자이크
           contents:
             - Yolov5 에서 knowledge distillation 진행
-            - 모델, 데이터 문제점 분석, 해결방법 도출. Recall 14.9%p 향상
+            - 모델, 데이터 문제점 분석, 해결방법 도출. Recall 4.3%p 향상
             - 로그 수집과 최신 모델 배포를 위한 관리자 서버구축
-            - Yolov5 knowledge distillation 공개 및 유지보수 중 (Star 45 개)
+            - Yolov5 knowledge distillation 공개 및 유지보수 중 (Star 67 개)
 
     - year: 2019
       description:
@@ -55,7 +70,7 @@
         - title: 사진 필터 어플리케이션
           contents:
             - Style transfer using cnn, CycleGAN, ESRGAN 구현 및 파이썬 라이브러리로 배포
-            - ESRGAN 코드 공개 (Star 76 개)
+            - ESRGAN 코드 공개 (Star 84 개)
 
     - year: 2018
       description:
@@ -64,7 +79,7 @@
             - HairMatteNet 구현 및 성능개선
             - 모델구조 변경 및 quantization 진행으로 성능향상 및 실행시간 단축
             - IoU 0.75%p 향상, inference time 42.9%, model size 56% 감소
-            - HairMatteNet 코드 공개 (Star 123 개)
+            - HairMatteNet 코드 공개 (Star 129 개)
 
 - title: Honors and Awards
   type: time_table
@@ -87,14 +102,12 @@
       description:
         - CVML Lab. 학부연구생 진행
 
-- title: Experience
+- title: Activity
   type: time_table
   contents:
-    - title: 중앙대학교 CVML lab 학부연구생
-      year: 2018.06-2021.08
-      description:
-        - DPSGAN 실험 지원 및 평가
-        - MDADN 경량화 실험 지원
+    - title: DAMO-YOLO 컨티리뷰션
+      year: 2023.03
+      description: https://github.com/tinyvision/DAMO-YOLO/pull/86
 
     - title: 프로그라피 운영진
       year: 2019 - 2020
