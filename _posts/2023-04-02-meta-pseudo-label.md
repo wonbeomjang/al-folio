@@ -9,7 +9,7 @@ categories: [semi-supervised-learning, paper]
 # Introduction
 
 <p align="center">
-    <img src="/assets/post/image/mpl-psudo-label.png" width="50%">
+    <img src="/assets/post/image/legacy/mpl-psudo-label.png" width="50%">
 </p>
 
 Semi-supervised learning 방법은 여러가지 있는데 그 중에 한 가지는 psuedo labeling 방법이다. 
@@ -29,7 +29,7 @@ teacher model은 unlabeled data의 psuedo label을 제작하고 student는 그 l
 - $$CE(q,p)$$: cross-entropy
 
 <p align="center">
-    <img src="/assets/post/image/mpl.png" width="50%">
+    <img src="/assets/post/image/legacy/mpl.png" width="50%">
 </p>
 
 Meta psuedo label은 다음과 같은 과정을 거친다.
@@ -114,7 +114,7 @@ Student는 오직 Meta Psuedo label로만 학습을 진행하였다. 이후에�
 ## Two moon dataset
 
 <p align="center">
-    <img src="/assets/post/image/mpl-two-moon.png" width="50%">
+    <img src="/assets/post/image/legacy/mpl-two-moon.png" width="50%">
 </p>
 
 각각의 class마다 unlabled data 1000개씩, label data 3개씩 추출하였다. 
@@ -128,7 +128,7 @@ EfficientNet과 같은 large model을 실험하기 전에 small model로 실험�
 세 가지 dataset을 사용하였는데 CIFAR-10-4K, SVHN은 WideResNet28-2를 사용하였고 imagenet은 resnet50을 사용하였다.
 
 <p align="center">
-    <img src="/assets/post/image/small-model.png" width="50%">
+    <img src="/assets/post/image/legacy/small-model.png" width="50%">
 </p>
 
 다른 SOTA method들 보다 더 좋은 성능을 보였다.
@@ -140,7 +140,7 @@ EfficientNet과 같은 large model을 실험하기 전에 small model로 실험�
 ImageNet supervised learning에서 사용했던 기법들과 비교를 해보았을 때 성능이 좋았다.
 
 <p align="center">
-    <img src="/assets/post/image/mpl-supervised.png" width="50%">
+    <img src="/assets/post/image/legacy/mpl-supervised.png" width="50%">
 </p>
 
 ## ImageNet
@@ -149,5 +149,5 @@ ImageNet을 labeled data, JFT를 unlabeled data로 사용하여 semi-supervised 
 supervised learning보다 성능이 좋았다.
 
 <p align="center">
-    <img src="/assets/post/image/mlp-imagenet.png" width="50%">
+    <img src="/assets/post/image/legacy/mlp-imagenet.png" width="50%">
 </p>

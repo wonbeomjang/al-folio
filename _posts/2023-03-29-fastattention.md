@@ -17,7 +17,7 @@ categories: [transformer, hardware-optimization, paper]
 ### GPU Memory Hierchy
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-gpu-hierchy.png" width="50%">
+    <img src="/assets/post/image/legacy/fastattention-gpu-hierchy.png" width="50%">
 </p>
 
 GPU는 CPU와 마찬가지로 메모리 계층을 가진다. DRAM이 가장 느리고 용량이 크며 SRAM이 가장 빠르고 용량이 작다. 
@@ -48,7 +48,7 @@ $$
 $$N \gg d$$를 만족한다(GPT-2, N=1024 and d=64).
 
 <p align="center">
-    <img src="/assets/post/image/standard-attention-algorithm.png" width="80%">
+    <img src="/assets/post/image/legacy/standard-attention-algorithm.png" width="80%">
 </p>
 
 # Flash Attention
@@ -58,7 +58,7 @@ FlashAttention은 **Tiling**과 **Recomputation**을 사용하여 Attention을 �
 ### Tiling
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-tiling.png" width="50%">
+    <img src="/assets/post/image/legacy/fastattention-tiling.png" width="50%">
 </p>
 
 기존의  softmax연산은 다음과 같은 과정으 거친다.
@@ -99,14 +99,14 @@ $$
 ### Kernel Fusion
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-kernel-fusion.png" width="50%">
+    <img src="/assets/post/image/legacy/fastattention-kernel-fusion.png" width="50%">
 </p>
 
 Tiling을 통해 한 번의 HBM load에서 matrix multiply, softmax, optionally masking and dropout, matrix multiply을 한 후 HBM에 저장할 수 있게 되었다. 
 이는 반복적인 IO operaion을 줄여준다.
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-algorithm.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-algorithm.png" width="80%">
 </p>
 
 > **Theorem 1**. Algorithm 1 returns $$O=softmax(QL^\top)V$$with $$O(N^2d)$$ FLOPs and requires  additional memory beyond inputs and output
@@ -115,7 +115,7 @@ Tiling을 통해 한 번의 HBM load에서 matrix multiply, softmax, optionally 
 ## Analysis: IO Complexity of FlashAttention
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-coomplexity.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-coomplexity.png" width="80%">
 </p>
 
 Flash attention은 standard보다 GFLOPs는 많지만 HBM read and write가 적어 runtime이 개선되었다.
@@ -144,7 +144,7 @@ FlashAttention은 tiling을 통해 속도가 빠르고 recomputation을 통해 �
 ### Bert
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-bert-performance.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-bert-performance.png" width="80%">
 </p>
 
 Bert 학습 시 MLPerf 1.1기준 학습시간이 15% 개선되었다.
@@ -154,7 +154,7 @@ Bert 학습 시 MLPerf 1.1기준 학습시간이 15% 개선되었다.
 GPT-2는 Huggingface, Megatron-LM과 비교했는데 각각 3배, 1.7배의 speed up이 생겼다.
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-gpt-2-performace.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-gpt-2-performace.png" width="80%">
 </p>
 
 ### Long-range Arena
@@ -162,7 +162,7 @@ GPT-2는 Huggingface, Megatron-LM과 비교했는데 각각 3배, 1.7배의 spee
 LRA에서도 기존대비 2.4x speed up을 보였으며 다른 attention method보다 성능도 좋았다.
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-long-reange-arena-performace.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-long-reange-arena-performace.png" width="80%">
 </p>
 
 ## Better Models with Longer Sequences
@@ -172,19 +172,19 @@ LRA에서도 기존대비 2.4x speed up을 보였으며 다른 attention method�
 Recomputing으로 메모리사용량이 줄어들면서 더 긴 input sequce를 다룰 수 있게 되었다. 이를통해 추가적인 성능향상을 가져왔다.
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-bert-with-long-sequence.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-bert-with-long-sequence.png" width="80%">
 </p>
 
 ### Long Document Classification
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-long-document-classification.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-long-document-classification.png" width="80%">
 </p>
 
 ### Path-X and Path-256
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-path-x.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-path-x.png" width="80%">
 </p>
 
 Path-X와 Path-256은 long context로 기존의 모델들은 random한 결과와 비슷하게 나왔다. 
@@ -193,7 +193,7 @@ FlashAttention은 해당 데이터셋에 random 이상의 결과를 가져온 �
 ## Benchmarking Attention
 
 <p align="center">
-    <img src="/assets/post/image/fastattention-banchmarking.png" width="80%">
+    <img src="/assets/post/image/legacy/fastattention-banchmarking.png" width="80%">
 </p>
 
 Attention계열(Attention, FlashAttention)은 메모리 사용량이 $$O(N^2)$$이지만 approximate attetion(sparse attention)은 $$O(n)$$이다. 

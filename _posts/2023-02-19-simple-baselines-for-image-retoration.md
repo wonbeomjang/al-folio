@@ -17,9 +17,9 @@ Image restoration에서 SOTA Network들은 많은 모듈을 추가하여 complex
 이후 더 발전사항으로 GELU를 GLU로 대체하 Channel Attanetion을 GLU형태로 변환해 SC(Simple Channel Attention)로 변경하였다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-perforamce.png" width="80%">
-    <img src="/assets/post/image/nafnet-inter-block-architecture.png" width="80%">
-    <img src="/assets/post/image/nafnet-intra-block-architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-perforamce.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-inter-block-architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-intra-block-architecture.png" width="80%">
 </p>
 
 # Simple Baseline
@@ -49,8 +49,8 @@ Image restoration에서 SOTA Network들은 많은 모듈을 추가하여 complex
 Baseline만으로 SOTA 달성하였다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-baseline-intra-block-architecture.png" width="80%">
-    <img src="/assets/post/image/nafnet-baseline-inter-block-architecture.png" width="80%">\
+    <img src="/assets/post/image/legacy/nafnet-baseline-intra-block-architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-baseline-inter-block-architecture.png" width="80%">\
 </p>
 
 # NAFNet
@@ -94,7 +94,7 @@ $$
 
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-sg.png" width="50%">
+    <img src="/assets/post/image/legacy/nafnet-sg.png" width="50%">
 </p>
 
 ## Channel Attention
@@ -120,7 +120,7 @@ SCA({X})={X}*Wpool({W})
 $$
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-sca.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-sca.png" width="80%">
 </p>
 
 ## NAFNet
@@ -128,13 +128,13 @@ $$
 결과적으로 만들어진 NAFNet의 block은 다음과 같다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-inter-block-architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-inter-block-architecture.png" width="80%">
 </p>
 
 전체적인 아키텍쳐는 앞서 언급했듯 UNet을 따른다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-intra-block-architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-intra-block-architecture.png" width="80%">
 </p>
 
 # Experiment
@@ -150,32 +150,32 @@ $$
 - TLC 사용 (Improving image restoration by revisiting global information aggregation. arXiv preprint arXiv:2112.04491 (2021))
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-table-1.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table-1.png" width="80%">
 </p>
 
 LayerNorm을 추가하면서 learning rate를 높일 수 있게되었고, GELU, CA로 성능이 높아졌다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-table-2.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table-2.png" width="80%">
 </p>
 
 GELU와 CA를 각각 SG, SCA로 바꾸었을 때 속도 약간 느려졌지만 성능이 좋아졌다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-table3.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table3.png" width="80%">
 </p>
 
 block수는 36개까지 성능향상이 컸는데 72개부터는 성능향상보다 complexity가 더 커서 36으로 결정하였다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-table-4-5.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table-4-5.png" width="80%">
 </p>
 
 TLC는 긍정적이었고 SG에서 non-linear function의 영향을 비교했지만 미미하여 Identity를 사용하였다.
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-table-6.png" width="80%">
-    <img src="/assets/post/image/nafnet-table-7.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table-6.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-table-7.png" width="80%">
 </p>
 
 Denosing과 Deblur 모두 SOTA를 달성하였다.
@@ -183,6 +183,6 @@ Denosing과 Deblur 모두 SOTA를 달성하였다.
 ## 이미지비교
 
 <p align="center">
-    <img src="/assets/post/image/nafnet-fig6.png" width="80%">
-    <img src="/assets/post/image/nafnet-fig7.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-fig6.png" width="80%">
+    <img src="/assets/post/image/legacy/nafnet-fig7.png" width="80%">
 </p>

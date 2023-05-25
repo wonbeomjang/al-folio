@@ -18,7 +18,7 @@ semi-supervised로 doamain adaptation을 하는 방법을 다루고 있다.
 논문에서 semi-supervised learning을 위하여 teacher-student 모델을 사용한다.
 
 <p align="center">
-    <img src="/assets/post/image/cross-domain-adaptation-for-object-detection.png" width="80%">
+    <img src="/assets/post/image/legacy/cross-domain-adaptation-for-object-detection.png" width="80%">
 </p>
 
 학습은 다음과 같이 진행된다.
@@ -66,9 +66,9 @@ $$
 # Result
 
 <p align="center">
-    <img src="/assets/post/image/da_result.png" width="100%">
-    <img src="/assets/post/image/da_result_2.png" width="50%">
-    <img src="/assets/post/image/da_result_3.png" width="80%">
+    <img src="/assets/post/image/legacy/da_result.png" width="100%">
+    <img src="/assets/post/image/legacy/da_result_2.png" width="50%">
+    <img src="/assets/post/image/legacy/da_result_3.png" width="80%">
 </p>
 
 AT는 SOTA를 찍긴 했지만 fully supervised learning (Oracle)보다 성능이 높은 것은 주목할만 하다.

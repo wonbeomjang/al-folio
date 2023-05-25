@@ -16,7 +16,7 @@ categories: [scene-text-detection, scene-text-recognition, paper]
 # Convolutional Character Network
 
 <p align="center">
-    <img src="/assets/post/image/convolutional_neural_network_architecture.png" width="80%">
+    <img src="/assets/post/image/legacy/convolutional_neural_network_architecture.png" width="80%">
 </p>
 
 모델은 Detection Branch와 Character Branch로 나뉘어져 있다. Character branch는 character detection과 recognization을 위해 만들어졌고 Text detection은 Text의 bbox를 예측한다.

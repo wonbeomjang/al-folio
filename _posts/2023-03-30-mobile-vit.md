@@ -18,7 +18,7 @@ Transformer는 NLP에서 좋은 성능을 보였고 vision task에서도 ViT를 
 
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-vit.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit-vit.png" width="80%">
 </p>
 
 
@@ -33,7 +33,7 @@ ViT는 spatial inductive bias를 무시하기 때문에 더 많은 파라미터�
 ## MobileVit Architecture
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit.png" width="80%">
 </p>
 
 MobileViT block은 위와 같다. MobileViT는 local global featyure를 적은 파라미터를 학습하기 위해 구상되었다.
@@ -52,7 +52,7 @@ $$
 위의 과정을 통해 local information을 $$X_U(p)$$에 encode하고, global information을 $$X_G(p)$$에 encode한다.
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-cnn-patch-relationship.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit-cnn-patch-relationship.png" width="80%">
 </p>
 
 위의 그림에서 볼 수 있 듯 convolution을 통해 local feature를 encode 한 후 transformer연산을 통해 inter-patch relationship을 encode하여 결과적으로 한 pixel이 다른 모든 pixel을 고려할 수 있게되었다.
@@ -106,13 +106,13 @@ Resolution set $$S={(H_1, W_1),...,(H_n, W_n)}$$에 대하여 최대 resolution�
 ### Comparison with CNNs
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-comperision-with-cnn.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit-comperision-with-cnn.png" width="80%">
 </p>
 
 ### Comparison with ViTs.
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-compersition-with-vit.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit-compersition-with-vit.png" width="80%">
 </p>
 
 ViT계열 모델들은 augmentation에 민감하다 따라서 basic과 advanced로 나누엇다.
@@ -122,7 +122,7 @@ ViT계열 모델들은 augmentation에 민감하다 따라서 basic과 advanced�
 MS-COCO에서 평가하였고 SSD에서 backbone만을 교체하여 실험하였다.
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-comparsition-with-detection.png" width="50%">
+    <img src="/assets/post/image/legacy/mobilevit-comparsition-with-detection.png" width="50%">
 </p>
 
 ## MOBILE SEMANTIC SEGMENTATION
@@ -130,19 +130,19 @@ MS-COCO에서 평가하였고 SSD에서 backbone만을 교체하여 실험하였
 DeepLabv3를 사용하였으며 데이터셋은 pascal voc 2012를 사용했다.
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-comparsition-segmentation.png" width="50%">
+    <img src="/assets/post/image/legacy/mobilevit-comparsition-segmentation.png" width="50%">
 </p>
 
 ## PERFORMANCE ON MOBILE DEVICES
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-comparisoin-using-iphone.png" width="80%">
+    <img src="/assets/post/image/legacy/mobilevit-comparisoin-using-iphone.png" width="80%">
 </p>
 
 CorML을 사용하여 iPhone12에서 실험을 진행했을 때 patch size별로 실험을 했을 때 모든 모델들은 real-time에서 동작하였다.
 
 <p align="center">
-    <img src="/assets/post/image/mobilevit-performance-using-iphone.png" width="50%">
+    <img src="/assets/post/image/legacy/mobilevit-performance-using-iphone.png" width="50%">
 </p>
 
 하지만 mobilenet과 같은 CNN모델보다는 성능이 안좋았다.
