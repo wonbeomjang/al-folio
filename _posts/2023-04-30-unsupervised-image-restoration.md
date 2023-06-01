@@ -34,19 +34,19 @@ categories: [image-restoration, unsupervised-learning]
     <img src="/assets/post/image/unsupervised-image-restoration/Untitled.png" width="80%">
 </p>
 
- 먼저 문제에 대한 정의를 하겠다. $\mathcal{X}$를 Noisy Image Domain, $\mathcal{Y}$를 Clean Image Domain이라고 하겠다. Encoder는 각각의 도메인을 같은 vector space인 shared-latent space $\mathcal{Z}$로 projection 시킨다. 따라서 vector space에 대하여 다음의 식이 성립한다.
+ 먼저 문제에 대한 정의를 하겠다. $$\mathcal{X}$$를 Noisy Image Domain, $$\mathcal{Y}$$를 Clean Image Domain이라고 하겠다. Encoder는 각각의 도메인을 같은 vector space인 shared-latent space $$\mathcal{Z}$$로 projection 시킨다. 따라서 vector space에 대하여 다음의 식이 성립한다.
 
 $$
 z=E_\mathcal{X}(x)=E_\mathcal{Y}(y)
 $$
 
-Generator는 shared-latent space $\mathcal{Z}$에서 image를 만들어낸다. 따라서 다음과 같은 식이 성립한다.
+Generator는 shared-latent space $$\mathcal{Z}$$에서 image를 만들어낸다. 따라서 다음과 같은 식이 성립한다.
 
 $$
 x=G_\mathcal{X}(z),y=G_\mathcal{Y}(z)
 $$
 
-이 때 각각의 도메인에대해 Encoder와 Generator는 $\{E_\mathcal{X}, G_\mathcal{X}\}, \{E_\mathcal{Y}, G_\mathcal{Y}\}$ 각각 존재한다. 각각의 encoder가 shared-latent space $\mathcal{Z}$로 projection을 시킨다고 하더라도 각각의 latent vector는 다르다. 따라서 latent vector를 구분하여 적어주겠다.
+이 때 각각의 도메인에대해 Encoder와 Generator는 $$\{E_\mathcal{X}, G_\mathcal{X}\}, \{E_\mathcal{Y}, G_\mathcal{Y}\}$$ 각각 존재한다. 각각의 encoder가 shared-latent space $$\mathcal{Z}$$로 projection을 시킨다고 하더라도 각각의 latent vector는 다르다. 따라서 latent vector를 구분하여 적어주겠다.
 
 $$
 z_\mathcal{X}=E_\mathcal{X}(x), z_\mathcal{Y}=E_\mathcal{Y}(y)
@@ -73,21 +73,21 @@ $$
     <img src="/assets/post/image/unsupervised-image-restoration/Untitled%201.png" width="80%">
 </p>
 
-먼저 extra noise encoder($E_\mathcal{X}^N$)을 도입을 한다. $E_\mathcal{X}^N$은 noise를 나타내는 texture latent vector를 뽑아내는 역할로 이를 도입해서 semantic representation과 texture representation을 분리했다. 이를 통해 $z_\mathcal{X}$와 $z_\mathcal{Y}$는 같은 distribution을 가지게 된다. 만약 noise image를 self-reconstruction하려면 $x=G_\mathcal{X}(z_\mathcal{X}, z_\mathcal{X}^N)$을 통하여 같이 reconstruction하면 된다.
+먼저 extra noise encoder($$E_\mathcal{X}^N$$)을 도입을 한다. $$E_\mathcal{X}^N$$은 noise를 나타내는 texture latent vector를 뽑아내는 역할로 이를 도입해서 semantic representation과 texture representation을 분리했다. 이를 통해 $$z_\mathcal{X}$와 $$z_\mathcal{Y}$$는 같은 distribution을 가지게 된다. 만약 noise image를 self-reconstruction하려면 $$x=G_\mathcal{X}(z_\mathcal{X}, z_\mathcal{X}^N)$$$을 통하여 같이 reconstruction하면 된다.
 
 ### Forward Cross Translation
 
- CycleGAN처럼 noise image에서 clean image 변환과 clean image에서 noise이미지의 변환이 되어야한다. 따라서 다음과 같은 방법으로 이미지 변환을 한다. 이 때 $\mathcal{Y}$에 $\mathcal{X}$의 noise를 추가하기 위해 $z_\mathcal{X}^N$를 이용한다.
+ CycleGAN처럼 noise image에서 clean image 변환과 clean image에서 noise이미지의 변환이 되어야한다. 따라서 다음과 같은 방법으로 이미지 변환을 한다. 이 때 $$\mathcal{Y}$$에 $$\mathcal{X}$$의 noise를 추가하기 위해 $$z_\mathcal{X}^N$$를 이용한다.
 
-1. Noise image → clean image: $\tilde{x}^{\mathcal{X}\rightarrow\mathcal{Y}} =G_\mathcal{Y}(z_\mathcal{X})$
-2. Clean image → noise image: $\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}} =G_\mathcal{X}(z_\mathcal{Y}\oplus z_\mathcal{X}^N)$
+1. Noise image → clean image: $$\tilde{x}^{\mathcal{X}\rightarrow\mathcal{Y}} =G_\mathcal{Y}(z_\mathcal{X})$$
+2. Clean image → noise image: $$\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}} =G_\mathcal{X}(z_\mathcal{Y}\oplus z_\mathcal{X}^N)$$
 
 ### Backward Cross Translation
 
- Forward cross translation을 했으니 backward cross translation을 할 수 있다. 이 때 $\mathcal{X}$에 $\mathcal{Y}$의 noise를 추가하기 위해 $E_\mathcal{X}^N(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}})$를 이용한다.
+ Forward cross translation을 했으니 backward cross translation을 할 수 있다. 이 때 $$\mathcal{X}$$에 $$\mathcal{Y}$$의 noise를 추가하기 위해 $$E_\mathcal{X}^N(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}})$$$를 이용한다.
 
-1. Noise image → clean image: $\hat{x}=G_\mathcal{X}(E_\mathcal{Y}(\tilde{x}^{\mathcal{X}\rightarrow\mathcal{Y}})\oplus E_\mathcal{X}^N(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}}))$
-2. Clean image → noise image: $\hat{y}=G_\mathcal{Y}(E_\mathcal{X}(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}}))$
+1. Noise image → clean image: $$\hat{x}=G_\mathcal{X}(E_\mathcal{Y}(\tilde{x}^{\mathcal{X}\rightarrow\mathcal{Y}})\oplus E_\mathcal{X}^N(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}}))$$
+2. Clean image → noise image: $$\hat{y}=G_\mathcal{Y}(E_\mathcal{X}(\tilde{y}^{\mathcal{Y}\rightarrow\mathcal{X}}))$$
 
  Backward cross translatio를 학습하기 위해 loss를 다음과 같이 구성한다.
 
@@ -101,7 +101,7 @@ $$
 
 ### Adversarial Domain Adaptation
 
- Semantic representation ($z_\mathcal{X}, z_\mathcal{Y}$)은 같은 vector space를 사용해야한다. 따라서 이를 강제하기 위해서 reprenentation discriminator $D_r$를 사용한다.
+ Semantic representation ($$z_\mathcal{X}, z_\mathcal{Y}$$)은 같은 vector space를 사용해야한다. 따라서 이를 강제하기 위해서 reprenentation discriminator $$D_r$$를 사용한다.
 
 $$
 \mathcal{L}^\mathcal{R}_{adv}(E_\mathcal{X},E_\mathcal{Y},D_\mathcal{R})=\mathbb{E}_\mathcal{X}[\frac{1}{2}logD_\mathcal{R}(z_\mathcal{X}+\frac{1}{2}(1-logD_\mathcal{R}(z_\mathcal{X})))] + \mathbb{E}_\mathcal{Y}[\frac{1}{2}logD_\mathcal{R}(z_\mathcal{Y}+\frac{1}{2}(1-logD_\mathcal{R}(z_\mathcal{Y})))]
@@ -180,7 +180,7 @@ $$
     <img src="/assets/post/image/unsupervised-image-restoration/Untitled%203.png" width="80%">
 </p>
 
- 학습이 끝난 후에 noise가 있는 이미지를 보구언하려면 cross encoder-generator $\{ E_\mathcal{X}, E_\mathcal{Y}\}$ 를 사용하면 된다. 
+ 학습이 끝난 후에 noise가 있는 이미지를 보구언하려면 cross encoder-generator $$\{ E_\mathcal{X}, E_\mathcal{Y}\}$ 를 사용하면 된다. 
 
 $$
 \tilde{x}^{\mathcal{X}\rightarrow \mathcal{Y}}=G_\mathcal{Y}(E_\mathcal{X}(x))
