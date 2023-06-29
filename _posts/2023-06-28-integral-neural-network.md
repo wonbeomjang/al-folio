@@ -61,7 +61,8 @@ $$F_O(x^{out})=\int_0^1 F_W(\lambda,x^{out},x^{in})F_I(x^{in})dx^{in}$$
 Pooling 연산은 간단하게 정의된다. Average pooling은 constant function을 이용한 convolution 연산으로 정의되고, max pooling은 signal discretization으로 정의할 수 있다. 또한 activation function은 discrete한 representation에서 적용하면 되는데 그 이유는 다음의 식이 성립하기 때문이다.
 
 $$\mathcal{D}(ActFunction(x),P_x)=ActFunction(\mathcal{D}(x,P_x))$$
-$$\mathcal{D}$$ 는 주어진 partition$$P_x$에 대해 discretization operation을 말하는 것이다. 즉, Continuous signal의 activate function을 discretizing한 것은 discretized signal에 activation function을 적용한 것과 동일하다는 관계식이 성립한다.
+
+$$\mathcal{D}$$ 는 주어진 partition$$P_x$$에 대해 discretization operation을 말하는 것이다. 즉, Continuous signal의 activate function을 discretizing한 것은 discretized signal에 activation function을 적용한 것과 동일하다는 관계식이 성립한다.
  
 ### Evaluation and backpropagation through integration
 
@@ -77,7 +78,7 @@ Backpropagation은 기존과 같은 chain-rule이 사용된다. 이는 Appendix 
 
 $$F_W(\lambda,x)=\sum_{i=0}^m\lambda_i u(xm-i)$$
 
-여기서$$m$과$$n$은 interpolation node의 개수와 그들의 값이다.
+여기서$$m$과$$n$$은 interpolation node의 개수와 그들의 값이다.
  
 <p align="center">
     <img src="/assets/post/image/integral-neural-network/fig4.png" width="80%">
