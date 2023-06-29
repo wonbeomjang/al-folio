@@ -92,6 +92,7 @@ $$F_W(\lambda,x^{out},x^{in})=\sum_{i,j}\lambda_{i,j}u(x^{out}m^{out}-i)u(x^{in}
 또한 evaluation을 위해 discrete하게 export 할 때 다음과 같이 export 하게 된다.
 
 $$W_q[k,l]=q_lW[k,l]=q_lF_W(\lambda,P_k^{out},P_l^{in})$$
+
 $$\vec{P}^{out}=\{kh^{out}\}_k, \vec{P}^{in}=\{lh^{in}\}_k$$
 
 ### Trainable partition
@@ -112,6 +113,7 @@ $$\vec{\delta}_{norm}=\frac{\vec{\delta}^2}{sum(\vec{\delta}^2)}, \vec{P}=cumsum
 network를 가능하면 smooth한 structure로 만들기 위해서 weight tensor의 특정방향의 total variation이 최소가 되도록 만들어아햔다. 이 문제는 많이 알려진 Traveling Salesman Problem (TSP)문제로 환원될 수 있다. 이 task에서는$$c^{out}$$ dimension에 따라 weight tensor는 city로 대응되고 distance는 total variance로 대응된다. 따라서 optimal permutation은 route로 대응되어 다음 식을 최소화 하는 것으로 문제를 해결하게 된다.
 
 $$min_{\sigma \in S_n}\sum|W[\sigma(i)]-W[\sigma(i+1)]|$$
+
 $$W$$ 는 weight tensor,$$\sigma$$ 는 permutation,$$\sigma(i)$$ 는 i-th element의 새로운 위치이다.
 
 ### Optimization of continuous weights
