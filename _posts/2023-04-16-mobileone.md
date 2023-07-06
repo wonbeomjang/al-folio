@@ -8,7 +8,7 @@ categories: [backbone, on-device-ai]
 
 # Introduction
 
- MobleNet, ShuufleNet등 경량화 네트워크들은 parameter의 수와 FLOPS를 기준으로 모델을 경량화하고 있다. MobileNetV3, MNasNet 등 만이 실제 기기에서 latency를 측정하여 반영하고 있다. 저자는 paramter수와 FLOPS가 줄어들수록 latency줄어드는 의 관계가 항상 일치하지 않는다는 것을 발견하여 실제로 모델의 어떤 부분이 높은 복잡로를 갖는지 평가하여 모델을 제작했따.
+ MobleNet, ShuufleNet등 경량화 네트워크들은 parameter의 수와 FLOPS를 기준으로 모델을 경량화하고 있다. MobileNetV3, MNasNet 등 만이 실제 기기에서 latency를 측정하여 반영하고 있다. 저자는 paramter수와 FLOPS가 줄어들수록 latency줄어드는 의 관계가 항상 일치하지 않는다는 것을 발견하여 실제로 모델의 어떤 부분이 높은 복잡로를 갖는지 평가하여 모델을 제작했다.
 
 # Method
 
@@ -49,7 +49,7 @@ Dynamic Shift-Max등 여러 강력한 activation function이 있으나 이는 la
 
 ### MobileOne Block
 
- 기본적인 block은 depthwise, pointwise layer로 factorization하였다. Basic block은 MobileNet-V1에서 사용하는 3x3 depthwise convolution과 1x1 pointwise convolution을 사용한다. 그리고 Rep-VGG에서 사용한 re-parameterizable skip connection을 사용한다. 이 떄 trivial over-parameterization factor k는 1~5의 값을 사용한다. Memory access cost를 줄이기 위해 skip connection은 inference time에 제거했다.
+ 기본적인 block은 depthwise, pointwise layer로 factorization하였다. Basic block은 MobileNet-V1에서 사용하는 3x3 depthwise convolution과 1x1 pointwise convolution을 사용한다. 그리고 Rep-VGG에서 사용한 re-parameterizable skip connection을 사용한다. 이 때 trivial over-parameterization factor k는 1~5의 값을 사용한다. Memory access cost를 줄이기 위해 skip connection은 inference time에 제거했다.
 
 
 <p align="center">
