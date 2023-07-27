@@ -61,7 +61,7 @@ FlashAttention은 **Tiling**과 **Recomputation**을 사용하여 Attention을 �
     <img src="/assets/post/image/legacy/fastattention-tiling.png" width="50%">
 </p>
 
-기존의  softmax연산은 다음과 같은 과정으 거친다.
+기존의  softmax연산은 다음과 같은 과정을 거친다.
 
 $$
 m(x):=\underset{i}{max}(x_i), f(x):=[e^{x_1-m(x)} ... e^{x_B-m(x)}],
@@ -71,7 +71,7 @@ $$
 l(x):=\sum_i f(x)_i, softmax(x):= \frac{f(x)}{l(x)}
 $$
 
-vector $$x^{(1)}, x^{(2)} \in \mathbb{R}^B$$일 때 vector의 concatenation $$x=[x^{(1)} x{(2)}]$$ 대해 softmax는 다음과 같이 decomposition을 할 수 있다.
+vector $$x^{(1)}, x^{(2)} \in \mathbb{R}^B$$일 때 vector의 concatenation $$x=[x^{(1)} x^{(2)}]$$ 대해 softmax는 다음과 같이 decomposition을 할 수 있다.
 
 $$
 m(x)=m([x^{(1)} x{(2)}])=max(m(x^{(1)})),m(x^{(2)}),
@@ -204,3 +204,8 @@ Attention계열(Attention, FlashAttention)은 메모리 사용량이 $$O(N^2)$$�
 FlashAttention은 CUDA kernel를 사용해야하므로 엔지니어링이 필요하다. 
 그리고 GPU마다 컴파일이 필요하는 등 확장성이 문제가 있다. 
 그리고 현재는 single gpu를 기준으로 만들어져있어서 multi-GPU를 위한 알고리즘도 제작해야한다.
+
+---
+**추가글...**  
+아앗... 포스트를 올리고 4개월만에 url이 틀렸다는 것을 깨달았다...  하지만 어쩔 수 없다... 그냥 간다...
+fastattentiondl 아니라 flashattention으로 해야하는데....
