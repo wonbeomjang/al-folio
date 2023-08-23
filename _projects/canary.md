@@ -21,6 +21,11 @@ PM, 핵심알고리즘 개발, ML모델 배포서버 제작, Azure ML 환경 설
 [https://www.youtube.com/watch?v=zD_AGme63og](https://www.youtube.com/watch?v=zD_AGme63og)  
 [https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5](https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5)
 
+**개발기**  
+[1. 팀 결정 및 주제&시스템 설계](http://0.0.0.0:8080/blog/2021/osam-1/)  
+[2. computer vision 개발 과정](http://0.0.0.0:8080/blog/2021/osam-1/)  
+[3. 이제 끝나는 건가](http://0.0.0.0:8080/blog/2021/osam-1/)  
+
 **내용**  
 본 프로젝트는 2021 군장병 공개SW 역량강화 온라인 해커톤의 출품작으로 전차, 군함, 총기, 문서 등 군사보안위반 가능성 물체들을 모자이크 해주고 이를 알려주는 어플리케이션을 제작했습니다. Object detection을 위해 yolov5를 사용하였으며 mosaic를 mosaic_9으로 바꾸고 self-distillation을 적용하여 Recall을 4.3%p 향상시켰습니다.  
 
