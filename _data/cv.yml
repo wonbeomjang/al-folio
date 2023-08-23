@@ -16,8 +16,11 @@
     - title: 뉴로클 리서치 엔지니어
       year: 2023.01-
       description:
-        - 성능 향상을 위한 실험 진행
-        - 연구 플랫폼 제작
+        - OCR auto=labeler 제막 및 OCR model 성능향상 (accuracy 4%p, traning time 1/3)
+        - Smart labeling (segmentation): 기술 검토 및 테스트, 모델 변환
+        - Smart labeling (object detection): 기술 검토 및 모델 변환
+        - 회사 블로그 제작
+        - 리서치팀 docker 등 개발환경 관리
     - title: 중앙대학교 CVML lab 학부연구생
       year: 2018.06-2021.08
       description:
