@@ -4,7 +4,9 @@ title: "시각장애인을 위한 약학정보제공 서비스 기획기"
 author: "wonbeomjang"
 date: 2020-01-03 21:49 # 작성 날짜 등록
 categories: [product-design] # 원하는 태그 등록
-image: 'https://wonbeomjang.github.io/assets/posts/zipyak/zipyak-icon.png' # 원하는 이미지 url 등록 
+image: 'https://wonbeomjang.github.io/assets/posts/zipyak/zipyak-icon.png' # 원하는 이미지 url 등록
+giscus_comments: true
+related_posts: true
 ---
 
 저는 친구와 함께 시각장애인을 위한 약학정보 서비스를 기획하고 개발했습니다. 서비스를 기획하면서 많은 조사와 인터뷰를 진행해 그 경험을 나누고자 합니다.  

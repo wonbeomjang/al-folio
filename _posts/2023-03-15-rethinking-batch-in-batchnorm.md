@@ -4,6 +4,8 @@ title:  "Rethinking “Batch” in BatchNorm"
 date:   2023-03-15 00:00:00 +0900
 description: Introduce the PreciseBN
 categories: [batch-normalization, paper]
+giscus_comments: true
+related_posts: true
 ---
 
 # Intorduction

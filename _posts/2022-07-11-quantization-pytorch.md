@@ -3,7 +3,8 @@ layout: post
 title:  "Pytorch Quantization 적용"
 date:   2022-07-11 18:50:11 +0900
 categories: [pytorch, hardware-optimization]
-comments: true
+giscus_comments: true
+related_posts: true
 ---
 
 딥러닝 모델이 실제 device에 deploy 하는데 2가지 문제점이 있다.  

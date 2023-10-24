@@ -4,6 +4,8 @@ title:  "MobileOne: An Improved One millisecond Mobile Backbone"
 date:   2023-04-17 00:00:00 +0900
 description: SOTA model of mobile backbone
 categories: [backbone, on-device-ai]
+giscus_comments: true
+related_posts: true
 ---
 
 # Introduction

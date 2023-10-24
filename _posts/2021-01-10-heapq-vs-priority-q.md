@@ -3,7 +3,8 @@ layout: post
 title:  "[Python] 우선순위 큐 (heapq vs priority queue)"
 date:   2021-01-10 15:41:11 +0900
 categories: [Data Structure, Python]
-comments: true
+giscus_comments: true
+related_posts: true
 ---
 
 파이썬에서는 유용한 자료구조 라이브러리를 제공합니다. 

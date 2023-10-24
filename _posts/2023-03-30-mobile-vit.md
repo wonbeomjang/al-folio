@@ -4,6 +4,8 @@ title:  "MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Tr
 date:   2023-03-30 00:00:00 +0900
 description: transformer for mobile device
 categories: [transformer, mobile-backbone, backbone, paper]
+giscus_comments: true
+related_posts: true
 ---
 
 # Introduction

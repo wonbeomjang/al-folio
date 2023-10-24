@@ -5,7 +5,8 @@ date: 2023-08-07 00:00:00 +0900
 description: 
 categories: [attention, hardware-optimization, paper] 
 tags: [attention, hardware-optimization, paper]
-
+giscus_comments: true
+related_posts: true
 ---
 
 # Introduction

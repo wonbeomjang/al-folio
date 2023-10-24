@@ -3,7 +3,8 @@ layout: post
 title:  "Pytorch Tensorrt 적용"
 date:   2022-07-12 18:50:11 +0900
 categories: [pytorch, hardware-optimization]
-comments: true
+giscus_comments: true
+related_posts: true
 ---
 
 TensorRT는 Deep Learning 모델을 최적화해 GPU에서 inference 속도를 향상시킬 수 있는 최적화 엔진이다.

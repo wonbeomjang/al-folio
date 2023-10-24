@@ -4,8 +4,9 @@ title:  "Integral Neural Network"
 date:   2023-06-22 00:00:00 +0900  
 description: CVPR2023 award 후보  
 categories: [backbone, paper, vit]  
-tags: [backbone, paper, cvpr, vit]  
-
+tags: [backbone, paper, cvpr, vit]
+giscus_comments: true
+related_posts: true
 ---
 
 # Introduction

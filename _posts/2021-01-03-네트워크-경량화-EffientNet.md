@@ -3,7 +3,8 @@ layout: post
 title:  "[네트워크 경량화] EfficientNet"
 date:   2021-01-03 16:41:11 +0900
 categories: [backbone, paper]
-comments: true
+giscus_comments: true
+related_posts: true
 ---
 
 이번에 소개해드릴 논문은 [EffientNet](https://arxiv.org/pdf/1905.11946.pdf)입니다. 
