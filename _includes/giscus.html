@@ -1,7 +1,7 @@
 <div id="giscus_thread" style="max-width: {{ site.max_width }}; margin: 0 auto;">
   {%- if site.giscus.repo -%}
   <script>
-    let giscusTheme = localStorage.getItem("theme");
+    // let giscusTheme = localStorage.getItem("theme");
     let giscusAttributes = {
         "src": "https://giscus.app/client.js",
         "data-repo": "{{ site.giscus.repo }}",
@@ -13,7 +13,7 @@
         "data-reactions-enabled": "{{ site.giscus.reactions_enabled }}",
         "data-emit-metadata": "{{ site.giscus.emit_metadata }}",
         "data-input-position": "{{ site.giscus.input_position }}",
-        "data-theme": giscusTheme,
+        "data-theme": "{{ site.giscus.theme }}",
         "data-lang": "{{ site.giscus.lang }}",
         "crossorigin": "anonymous",
         "async": "",
