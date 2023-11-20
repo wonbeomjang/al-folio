@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /publications/
-title: publications
+title: Publications
 description: 논문 및 페이퍼
 years: [2022]
 nav: true
