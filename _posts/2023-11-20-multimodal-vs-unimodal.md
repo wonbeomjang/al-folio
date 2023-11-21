@@ -11,7 +11,9 @@ tags: [multi-modal, paper]
 
 우리 세상은 많은 modality가 존재한다. 그리고 관념적으로도 여러 modal의 네트워크들을 fusion시키면 uni-modal보다 성능이 더 좋게 나온다. 그렇다면 우리는 이러한 궁금증이 생긴다.
 
+<p align="center">
 *multi-modal learning이 uni-modal learning보다 좋은 성능을 제공할까?*
+</p>
 
 저자는 이 궁금증에서 연구를 시작했고, 다음 두 가지를 중점적으로 살펴봤다.
 - (When) 어떤 상황에서 multi-modal이 uni-modal 보다 성능이 좋은가?

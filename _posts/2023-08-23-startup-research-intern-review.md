@@ -16,7 +16,7 @@ related_posts: true
 </p>
 
 <p align="center">
-'Researcher일까? Engineer일까?'
+*'Researcher일까? Engineer일까?'*
 </p>
 
 
