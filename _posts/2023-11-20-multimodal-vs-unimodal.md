@@ -171,7 +171,7 @@ sample size s가 클 때 $$\gamma_{\mathcal{S}}(\mathcal{M},\mathcal{N})$$ 이 n
 
 
 <p align="center">
-    <img src="/assets/post/image/multi-modal-vs-uni-modal/0. assets/post/image/multi-modal-vs-uni-modal/table1.png" width="80%">
+    <img src="/assets/post/image/multi-modal-vs-uni-modal/table1.png" width="80%">
 </p>
 
 Modal이 늘어날 수록 정확도가 상승하는 것을 볼 수 있다.
@@ -182,7 +182,7 @@ Modal이 늘어날 수록 정확도가 상승하는 것을 볼 수 있다.
 
 
 <p align="center">
-    <img src="/assets/post/image/multi-modal-vs-uni-modal/0. assets/post/image/multi-modal-vs-uni-modal/table2.png" width="80%">
+    <img src="/assets/post/image/multi-modal-vs-uni-modal/table2.png" width="80%">
 </p>
 
 여기서 볼 수 있듯, sample의 수가 줄어들면 madality의 수가 적을 때 성능이 좋은 경우가 있다. 
@@ -192,7 +192,7 @@ Modal이 늘어날 수록 정확도가 상승하는 것을 볼 수 있다.
 multi-modal은 latent space quality가 좋다고 했다. 이를 확인해보자.
 
 <p align="center">
-    <img src="/assets/post/image/multi-modal-vs-uni-modal/0. assets/post/image/multi-modal-vs-uni-modal/table3.png" width="80%">
+    <img src="/assets/post/image/multi-modal-vs-uni-modal/table3.png" width="80%">
 </p>
 
 
@@ -208,7 +208,7 @@ Sample의 수와 modal의 수로 비교해도 같은 결과를 낸다.
 실제 데이터에서 sample의 수가 많을 때 multi-modal이 좋다는 것을 확인했다. 인공데이터는 어떨까?
 
 <p align="center">
-    <img src="/assets/post/image/multi-modal-vs-uni-modal/0. assets/post/image/multi-modal-vs-uni-modal/table4.png" width="80%">
+    <img src="/assets/post/image/multi-modal-vs-uni-modal/table4.png" width="80%">
 </p>
 
 저자가 만든 인공데이터도 같은 모습을 보였다.
