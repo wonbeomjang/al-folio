@@ -148,7 +148,7 @@ $$\hat{L}(\hat{h}_{\mathcal{M}} \circ \hat{g}_{\mathcal{M}}, S) \leq \hat{L}(\ha
 
 *그렇다면 언제  multi-modal을 사용해야하냐?* 
 
-$$\hat{L}(\hat{h}_{\mathcal{N}} \circ \hat{g}_{\mathcal{N}}, S) - \hat{L}(\hat{h}_{\mathcal{M}} \circ \hat{g}_{\mathcal{M}}, S) \geq \sqrt{\frac{C(\mathcal{H}\circ\mathcal{G}_\mathcal{M})}{m}}-\sqrt{\frac{C(\mathcal{H}\circ\mathcal{G}_\mathcal{N})}{m}} $$$
+$$\hat{L}(\hat{h}_{\mathcal{N}} \circ \hat{g}_{\mathcal{N}}, S) - \hat{L}(\hat{h}_{\mathcal{M}} \circ \hat{g}_{\mathcal{M}}, S) \geq \sqrt{\frac{C(\mathcal{H}\circ\mathcal{G}_\mathcal{M})}{m}}-\sqrt{\frac{C(\mathcal{H}\circ\mathcal{G}_\mathcal{N})}{m}} $$
 
 저자는 다음과 같이 말한다.
 
