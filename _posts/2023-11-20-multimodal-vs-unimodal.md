@@ -178,7 +178,7 @@ sample size s가 클 때 $$\gamma_{\mathcal{S}}(\mathcal{M},\mathcal{N})$$ 이 n
 
 Modal이 늘어날 수록 정확도가 상승하는 것을 볼 수 있다.
 
-## Number of Samples
+## Number of Samples
 
 위에서 sample의 수가 클 때 multi-modal이 좋다고 했다. 따라서 이를 살펴보자.
 
