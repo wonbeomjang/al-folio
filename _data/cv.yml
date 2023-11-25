@@ -14,9 +14,10 @@
   type: time_table
   contents:
     - title: 뉴로클 리서치 엔지니어
-      year: 2023.01-
+      year: 2023.01-2023.08
       description:
-        - OCR auto=labeler 제막 및 OCR model 성능향상 (accuracy 4%p, traning time 1/3)
+        - OCR autolabeler 제막 및 OCR model 성능향상 (accuracy 4%p, training time 1/3)
+        - Anomaly Detection 경량화
         - Smart labeling (segmentation) 기술 검토 및 테스트, 모델 변환
         - Smart labeling (object detection) 기술 검토 및 모델 변환
         - 회사 블로그 제작
