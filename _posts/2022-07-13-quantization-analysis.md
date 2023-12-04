@@ -14,67 +14,16 @@ Quantization은 precision reduction으로 parameter의 용량을 줄이기위해
 <br>
 각각 코드는 다음과 같다.
 
-### pytorch_cpu
-```python
-from torchvision.models.quantization.mobilenetv2 import mobilenet_v2
-import torch
+### pytorch cpu
 
-net = mobilenet_v2(pretrained=True).eval()
-net.eval()
-net.qconfig = torch.quantization.get_default_qconfig("fbgemm")
-# net.fuse_model()
-net.train()
-quantization = torch.quantization.prepare_qat(net)
-quantization = quantization.cpu().eval()
-quantization = torch.quantization.convert(quantization)
-
-image = torch.ones([1, 3, 224, 224])
-
-for i in range(5000):
-    net(image)
-
-```
+<script src="https://gist.github.com/wonbeomjang/419b410674ec8a7d5dcb6ffc38371289.js"></script>
 
 ### quantization with non layer fusion
-```python
-from torchvision.models.quantization.mobilenetv2 import mobilenet_v2
-import torch
+<script src="https://gist.github.com/wonbeomjang/2d0bee28abcf47ea2e59febd094dbefd.js"></script>
 
-net = mobilenet_v2(pretrained=True).cuda().eval()
-net.eval()
-net.qconfig = torch.quantization.get_default_qconfig("fbgemm")
-# net.fuse_model()
-net.train()
-quantization = torch.quantization.prepare_qat(net)
-quantization = quantization.cpu().eval()
-quantization = torch.quantization.convert(quantization)
+### quantization with payer fusion
 
-image = torch.ones([1, 3, 224, 224])
-
-for i in range(5000):
-    quantization(image)
-
-```
-
-### quantization with payer fusoin
-```python
-from torchvision.models.quantization.mobilenetv2 import mobilenet_v2
-import torch
-
-net = mobilenet_v2(pretrained=True).cuda().eval()
-net.eval()
-net.qconfig = torch.quantization.get_default_qconfig("fbgemm")
-net.fuse_model()
-net.train()
-quantization = torch.quantization.prepare_qat(net)
-quantization = quantization.cpu().eval()
-quantization = torch.quantization.convert(quantization)
-
-image = torch.ones([1, 3, 224, 224])
-
-for i in range(5000):
-    quantization(image)
-```
+<script src="https://gist.github.com/wonbeomjang/e57959145f6b6c219cf30c10d8c718ac.js"></script>
 
 ## Result
 결과는 ubuntu에 perf을 통해 측정했다.
