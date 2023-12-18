@@ -5,7 +5,8 @@ date: 2023-11-20 00:00:00 +0900
 description: NeurIPS 2021
 categories: [multi-modal, paper] 
 tags: [multi-modal, paper]
-
+giscus_comments: true
+related_posts: true
 ---
 # Introduction
 

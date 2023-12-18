@@ -17,58 +17,18 @@ Jetson nano 18.04 설치방법은 아래에 나와있다. 여기서 20.04버전�
 
 # 1. Pytorch 속도 측정
 tensorrt를 사용하기 앞서 pytorch에서 gpu에 올려 돌렸을 때 inference time을 측정해봤다.
-```python
-import torch
-from torchvision.models import mobilenetv3
-from time import time
-import os
 
-model_f32 = mobilenetv3.mobilenet_v3_small().to("cuda")
-input_f32 = torch.rand((1, 3, 256, 256)).to("cuda")
+<script src="https://gist.github.com/wonbeomjang/6878e49a9b7152f004f8be6bbf57ca61.js"></script>
 
-# caching model to gpu 
-with torch.no_grad():
-    model_f32(input_f32)
-    
-with torch.no_grad():
-    cur = time()
-    for i in range(1000):
-        model_f32(input_f32)
-
-inference_time = time() - cur
-torch.save(model_f32, "tmp.pth")
-model_size = os.path.getsize("tmp.pth") / 1e6
-os.remove("tmp.pth")
-        
-print(f"{inference_time:.2f} ms / {model_size:.4f}MB")
-```
 output
 ```bash
 37.80 ms / 10.3278MB
 ```
 
 tensorrt에서 float16을 사용할 예정으로 torch.float16으로 type을 변경하여 실험하자.
-```python
-model_f16 = mobilenetv3.mobilenet_v3_small().to("cuda").half()
-input_f16 = torch.rand((1, 3, 256, 256)).to("cuda").half()
 
-# caching model to gpu 
-with torch.no_grad():
-    cur = time()
-    model_f16(input_f16)
+<script src="https://gist.github.com/wonbeomjang/5100109fa6151b032c6136b75ab1a5f3.js"></script>
 
-with torch.no_grad():
-    cur = time()
-    for i in range(1000):
-        model_f16(input_f16)
-
-inference_time = time() - cur
-torch.save(model_f16, "tmp.pth")
-model_size = os.path.getsize("tmp.pth") / 1e6
-os.remove("tmp.pth")
-        
-print(f"{inference_time:.2f} ms / {model_size:.4f}MB")
-```
 output
 ```bash
 41.11 ms / 5.2162MB
@@ -77,20 +37,13 @@ output
 # 2. ONNX export
 tensorrt 라이브러리를 이용하기 위해서 pytorch model을 onnx model로 변환해줘야한다.
 torch.onnx를 통해 mobilenet을 export하자.
-```python
-BATCH_SIZE=1
 
-dummy_input=torch.randn(BATCH_SIZE, 3, 224, 224)
-torch.onnx.export(model_f32.cpu(), dummy_input, "mobilnet_f32.onnx", verbose=False)
-```
+<script src="https://gist.github.com/wonbeomjang/beadfdfc74aa8dbc16de6ff539c8a4c5.js"></script>
 
 그리고 만약 jupyter notebook이라면 tensorrt로 변환하는 동안 pytorch 때문에 gpu 메모리가 부족하여 변환에 실패한다. 
 따라서 exit를 사용하여 kernel을 종료하자.
-```python
-import os
 
-os._exit(0)
-```
+<script src="https://gist.github.com/wonbeomjang/14520515b147699edc2966f5bf5bd234.js"></script>
 
 # 3. Tensorrt 변환
 trtexec을 통해 mobilenet model을 tensorrt model로 변환하자.
@@ -109,49 +62,18 @@ fi
 
 # 4. TensorRT inference
 먼저 trt.Runtime 객체를 만들어 runtime용 객체를 만들고 tensorrt file을 읽어들어와 engine을 context를 선언하자.
-```python
-import tensorrt as trt
-import pycuda.driver as cuda
-import pycuda.autoinit
 
-f = open("resnet_engine_pytorch.trt", "rb")
-runtime = trt.Runtime(trt.Logger(trt.Logger.WARNING)) 
-
-engine = runtime.deserialize_cuda_engine(f.read())
-context = engine.create_execution_context()
-```
+<script src="https://gist.github.com/wonbeomjang/46e8b292fa32a9c71bb84003cbd206bc.js"></script>
 
 cuda를 용하여 intput, output용 메모리를 할당한다.
 그후 inference를 위한 stream 객체를 선언한다.
-```python
-import numpy as np
 
-batch_size = 1
-input_batch = np.ones([batch_size, 3, 256, 256])
-output = np.empty([batch_size, 1000])
-
-d_input = cuda.mem_alloc(1 * input_batch.nbytes)
-d_output = cuda.mem_alloc(1 * output.nbytes)
-
-bindings = [int(d_input), int(d_output)]
-stream = cuda.Stream()
-```
+<script src="https://gist.github.com/wonbeomjang/570a107abe058c240e42b57cb4e7baa8.js"></script>
 
 이후 numpy array를 cuda memory에 copy하고 모델을 inferecne한 다음 d_output을 output ndarray에 copy한다.
 마지막으로 병렬처리를 위한 stream threads을 syncronize하여 마무리한다.
-```python
-def predict(batch): # result gets copied into output
-    # transfer input data to device
-    cuda.memcpy_htod_async(d_input, batch, stream)
-    # execute model
-    context.execute_async_v2(bindings, stream.handle, None)
-    # transfer predictions back
-    cuda.memcpy_dtoh_async(output, d_output, stream)
-    # syncronize threads
-    stream.synchronize()
-    
-    return output
-```
+
+
 
 이제 time을 측정해보자.
 ```python
