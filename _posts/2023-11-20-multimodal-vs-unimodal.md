@@ -8,6 +8,8 @@ tags: [multi-modal, paper]
 giscus_comments: true
 related_posts: true
 ---
+
+
 # Introduction
 
 우리 세상은 많은 modality가 존재한다. 그리고 관념적으로도 여러 modal의 네트워크들을 fusion시키면 uni-modal보다 성능이 더 좋게 나온다. 그렇다면 우리는 이러한 궁금증이 생긴다.
