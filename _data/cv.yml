@@ -89,11 +89,11 @@
   type: time_table
   contents:
     - year: 2021
-      items: 
+      items:
         - 2021 군장병 공개 SW 온라인 해커톤
         - 해군참모총장상 (장려상)
     - year: 2019
-      items: 
+      items:
         - 배리어프리 앱 개발 콘테스트
         - 장려상
 
