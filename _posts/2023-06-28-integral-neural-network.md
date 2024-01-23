@@ -163,7 +163,7 @@ Section 4에서 partitioning을 finetuning할 수 있다고 했다. 따라서 DN
     <img src="/assets/post/image/integral-neural-network/fig1.png" width="100%">
 </p>
 
- 기존의 pruning 방법과도 비교해봤다. 그 결과 INN을 통해서 pruning하는 것이 성능하락이 적었으며 몇 개의 데이터로만 partition tuning을 했을 때 성능하락이 가장 적은 것을 알 수 있었다.
+기존의 pruning 방법과도 비교해봤다. 그 결과 INN을 통해서 pruning하는 것이 성능하락이 적었으며 몇 개의 데이터로만 partition tuning을 했을 때 성능하락이 가장 적은 것을 알 수 있었다.
 
 # Comment
 

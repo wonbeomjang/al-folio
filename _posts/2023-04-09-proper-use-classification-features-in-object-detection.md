@@ -42,9 +42,7 @@ related_posts: true
 - FPN, RPN, Detection Cascade 등은 network의 generalzation에 도움을 준다.
 - 해당 요소들의 capacity가 충분하면 backbone freezing이 fine-tuning과 training scratch보다 좋은 성능을 보인다.
 - Backbone pretraining시 classification dataset의 수가 많아질수록 성능이 높아진다.
--
-
-**Data Augmentation**
+- **Data Augmentation**
 
 Instance segmentation 실험에서는 Data augmentation은 다음을 사용했다.
 

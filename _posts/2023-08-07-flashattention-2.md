@@ -161,7 +161,7 @@ Backward 자체는 $$L$$ 을 사용한다는 것 말고는 별 다른 이야기�
 저자는 sequence length dimension으로 병렬처리를 한다. 하지만 이는 한 sequence내에서는 독립적으로 처리되어야함으로 다른 sequence와 통신을 하지 못하도록 구성했다. 물론 이전과 마찬가지로 batch, multi-head간 병렬처리는 유지한다.
 
 **backward pass**
- Algorithm 2에 의하면 column block간에 병렬처리만 한다. 위의 경우와 같이 sequence length dimension로도 병렬처리가 가능하여 추가하게 된다.
+Algorithm 2에 의하면 column block간에 병렬처리만 한다. 위의 경우와 같이 sequence length dimension로도 병렬처리가 가능하여 추가하게 된다.
 
 <p align="center">
     <img src="/assets/post/image/flashattention2/fig2.png" width="80%">
