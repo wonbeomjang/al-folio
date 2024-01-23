@@ -17,14 +17,14 @@ category: toy-project
 PM, 핵심알고리즘 개발, ML모델 배포서버 제작, Azure ML 환경 설정 결과 데이터 문제점 분석 및 해결방법 도출. Recall 2%p, Precision 1%p 향상  
 
 **링크**  
-[https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary_2021](https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary_2021)  
+[https://github.com/wonbeomjang/AI_APP_WEB_Canary_Canary_2021](https://github.com/wonbeomjang/AI_APP_WEB_Canary_Canary_2021)  
 [https://www.youtube.com/watch?v=zD_AGme63og](https://www.youtube.com/watch?v=zD_AGme63og)  
-[https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5](https://github.com/osamhack2021/AI_APP_WEB_Canary_Canary/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5)
+[https://github.com/wonbeomjang/AI_APP_WEB_Canary_Canary_2021/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5](https://github.com/wonbeomjang/AI_APP_WEB_Canary_Canary_2021/tree/main/AI(BE)/deeplearning/kwoledge_distillation_yolov5)
 
 **개발기**  
-[1. 팀 결정 및 주제&시스템 설계](http://0.0.0.0:8080/blog/2021/osam-1/)  
-[2. computer vision 개발 과정](http://0.0.0.0:8080/blog/2021/osam-1/)  
-[3. 이제 끝나는 건가](http://0.0.0.0:8080/blog/2021/osam-1/)  
+[1. 팀 결정 및 주제&시스템 설계](https://www.wonbeomjang.kr/blog/2021/osam-1/)  
+[2. computer vision 개발 과정](https://www.wonbeomjang.kr/blog/2021/osam-1/)  
+[3. 이제 끝나는 건가](https://www.wonbeomjang.kr/blog/2021/osam-1/)  
 
 **내용**  
 본 프로젝트는 2021 군장병 공개SW 역량강화 온라인 해커톤의 출품작으로 전차, 군함, 총기, 문서 등 군사보안위반 가능성 물체들을 모자이크 해주고 이를 알려주는 어플리케이션을 제작했습니다. Object detection을 위해 yolov5를 사용하였으며 mosaic를 mosaic_9으로 바꾸고 self-distillation을 적용하여 Recall을 4.3%p 향상시켰습니다.  
@@ -55,7 +55,7 @@ Node js가 분석 요청 시 Detection Module은 Django에 성능이 좋은 모�
   <tr align="center">
     <td><a href="https://pytorch.org/"><img src='https://user-images.githubusercontent.com/40621030/136698820-2c869052-ff44-4629-b1b9-7e1ae02df669.png' height=80></a></td>
     <td><a href="https://opencv.org/"><img src='https://user-images.githubusercontent.com/40621030/136698821-10434eb5-1a98-4108-8082-f68297012724.png' height=80></a></td>
-    <td><a href="https://cvat.org/"><img src='https://user-images.githubusercontent.com/40621030/136698825-f2e1816f-580b-4cf1-960d-295e9f18a329.png' height=80></a></td>
+    <td><a href="https://www.cvat.ai/"><img src='https://user-images.githubusercontent.com/40621030/136698825-f2e1816f-580b-4cf1-960d-295e9f18a329.png' height=80></a></td>
     <td><a href="https://roboflow.com/"><img src='https://user-images.githubusercontent.com/40621030/136698826-e18a44a9-63d1-498b-a63f-c76bdc603f3b.png' height=80></a></td>
   </tr>
   <tr align="center">

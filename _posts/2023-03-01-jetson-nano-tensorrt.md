@@ -13,7 +13,7 @@ python tenosrrt package를 buil하기 귀찮아 ubuntu 18.08을 사용하여 내
 
 Jetson nano 18.04 설치방법은 아래에 나와있다. 여기서 20.04버전이 아닌 18.04 공식 이미지를 사용해야한다.  
 
-[http://wonbeomjang.kr/blog/2023/jetson-nano-ubuntu/](http://wonbeomjang.kr/blog/2023/jetson-nano-ubuntu/)
+[http://www.wonbeomjang.kr/blog/2023/jetson-nano-ubuntu/](http://www.wonbeomjang.kr/blog/2023/jetson-nano-ubuntu/)
 
 # 1. Pytorch 속도 측정
 tensorrt를 사용하기 앞서 pytorch에서 gpu에 올려 돌렸을 때 inference time을 측정해봤다.
