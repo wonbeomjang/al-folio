@@ -28,12 +28,11 @@
         - DPSGAN 실험 지원 및 평가
         - MDADN 경량화 실험 지원
 
-
 - title: paper
   type: time_table
   contents:
     - title: Deep-plane sweep generative adversarial network for consistent multi-view depth estimation
-      institution:  Mach. Vis. Appl. 33(1)
+      institution: Mach. Vis. Appl. 33(1)
       year: 2022
       description:
         - 평가데이터 수집 및 기업제공 데이터 변환

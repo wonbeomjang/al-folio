@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer"
-date:   2023-03-30 00:00:00 +0900
+title: "MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer"
+date: 2023-03-30 00:00:00 +0900
 description: transformer for mobile device
 categories: [transformer, mobile-backbone, backbone, paper]
 giscus_comments: true
@@ -10,22 +10,21 @@ related_posts: true
 
 # Introduction
 
-Transformer는 NLP에서 좋은 성능을 보였고 vision task에서도 ViT를 통하여 좋은 성능을 보여줬다. 
-이는 global representation을 학습할 수 있기 때문인데 이와같은 성질은 light weight제작시 단점이 된다. 
-기존의 CNN에서 light weight 제작은 인접픽셀끼리 높은 상관관계를 가지고 있다라는 inductive bias의 덕을 보았기 때문이다. 
+Transformer는 NLP에서 좋은 성능을 보였고 vision task에서도 ViT를 통하여 좋은 성능을 보여줬다.
+이는 global representation을 학습할 수 있기 때문인데 이와같은 성질은 light weight제작시 단점이 된다.
+기존의 CNN에서 light weight 제작은 인접픽셀끼리 높은 상관관계를 가지고 있다라는 inductive bias의 덕을 보았기 때문이다.
 따라서 저자는 CNN과 ViT의 장점을 합쳐놓은 MobileViT를 제안하였고, light weight, general-purpose, low latency를 달성하였다.
 
 # MobileViT
-## ViT
 
+## ViT
 
 <p align="center">
     <img src="/assets/post/image/legacy/mobilevit-vit.png" width="80%">
 </p>
 
-
 1. Input $$X \in \mathbb{R}^{H \times W \times C}$$를 flatten patch $$X_f \in \mathbb{R}^{N \times PC}$$로 만든다.
-2. Fixed *d*-dimensional space $$X_p \in \mathbb{R}^{N \times d}$$에 projection 시킨다.
+2. Fixed _d_-dimensional space $$X_p \in \mathbb{R}^{N \times d}$$에 projection 시킨다.
 3. *L*개의 transformer block을 이용하여 inner-patch representation을 학습한다.
 
 ViT의 computational cost는 $$O(N^2d)$$이고, $$P=wh$$이다.
@@ -71,24 +70,24 @@ Standard convolution은 다음 3가지 연산의 스택으로 볼 수 있다.
 
 ### Light-weight.
 
-다른 ViT계열 모델들은 transformer만 사용하여 inter-patch relationship을 계산하여 image-specific inductive bias의 정보를 잃게되었다. 
+다른 ViT계열 모델들은 transformer만 사용하여 inter-patch relationship을 계산하여 image-specific inductive bias의 정보를 잃게되었다.
 하지만 MobileViT block은 convolution-like한 특성을 가지고 있어 다른 모델보다 경량화가 가능한 것이다.
 
 ### Computational cost
 
-MobileViT $$O(N^2Pd)$$, ViT는 $$O(N^2d)$$이다. 
+MobileViT $$O(N^2Pd)$$, ViT는 $$O(N^2d)$$이다.
 MobileViT는 ViT보다 비효율적이지만 실제로는 DeIT보다 2배 더 적은 FLOPs와 1.8%의 성능향상이 되었다.
 
 ### MobileViT architecture
 
-light-weight CNN을 고려하여 S, XS, XXS 모델을 만들었고, 처음 layer는 3x3 standard convolution layer를 사용하고 다음은 MobileNetv2(MV2) block과 MobileViT block을 사용한다. 
-MobileViT block에서는 3x3 CNN을 사용하였고 $$h=w=2$$를 사용하였다. 
+light-weight CNN을 고려하여 S, XS, XXS 모델을 만들었고, 처음 layer는 3x3 standard convolution layer를 사용하고 다음은 MobileNetv2(MV2) block과 MobileViT block을 사용한다.
+MobileViT block에서는 3x3 CNN을 사용하였고 $$h=w=2$$를 사용하였다.
 MV2는 down-sampling의 역할을 수행한다.
 
 ## MULTI-SCALE SAMPLER FOR TRAINING EFFICIENCY
 
-일반적인 ViT모델들은 여러 스케일의 모델들을 만든 후 fine-tuning할수밖에 없다. 
-하지만 MobileViT는 multi-scale traning이 가능하고 이 때 GPU성능을 끌어올리기 위해 batch-size를 resoution마다 유동적이게 관리했다. 
+일반적인 ViT모델들은 여러 스케일의 모델들을 만든 후 fine-tuning할수밖에 없다.
+하지만 MobileViT는 multi-scale traning이 가능하고 이 때 GPU성능을 끌어올리기 위해 batch-size를 resoution마다 유동적이게 관리했다.
 Resolution set $$S={(H_1, W_1),...,(H_n, W_n)}$$에 대하여 최대 resolution이 $$(H_t, W_t) \in S$$일 때, t번째 resolution $$(H_t, W_t) \in S$$의 batch size는 $$b_t=\frac{H_nW_nb}{H_tW_t}$$이다.
 
 # EXPERIMENTAL RESULTS

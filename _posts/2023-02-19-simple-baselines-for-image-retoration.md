@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Simple Baselines for Image Restoration"
-date:   2023-02-19 00:00:00 +0900
+title: "Simple Baselines for Image Restoration"
+date: 2023-02-19 00:00:00 +0900
 description: NAFNet
 categories: [deblurring, denosing, paper]
 giscus_comments: true
@@ -10,11 +10,11 @@ related_posts: true
 
 # Introduction
 
-Image restoration에서 SOTA Network들은 많은 모듈을 추가하여 complexity가 증가하였다. 
+Image restoration에서 SOTA Network들은 많은 모듈을 추가하여 complexity가 증가하였다.
 저자는 이를 inter-block complexity, intra-block complexity로 나누오 생각했고, low inter-block complexity와 low intra-block complexity로 SOTA를 달성하기 위해 여러 실험을 진행하였다.
 
-기본적으로 UNet구조를 따랐고, convolution-relu-shortcut으로 구성된 간단한 plain block으로 시작하였다. 
-이후 plain block에서 SOTA method 중 필수적이라고 생각하는 것 만을 하나씩 추가하였고 결과적으로 GELU, Channel Attention을 추가하였다. 
+기본적으로 UNet구조를 따랐고, convolution-relu-shortcut으로 구성된 간단한 plain block으로 시작하였다.
+이후 plain block에서 SOTA method 중 필수적이라고 생각하는 것 만을 하나씩 추가하였고 결과적으로 GELU, Channel Attention을 추가하였다.
 이후 더 발전사항으로 GELU를 GLU로 대체하 Channel Attanetion을 GLU형태로 변환해 SC(Simple Channel Attention)로 변경하였다.
 
 <p align="center">
@@ -30,20 +30,20 @@ Image restoration에서 SOTA Network들은 많은 모듈을 추가하여 complex
 ## Internal architecture
 
 - Block
-    - **PlainNet: Conv, ReLU, Shortcut**
-    - Transformer 사용 X
-        - SOTA를 달성하는데 필수요소 X
-        - Depth-wise convolution이 더 간단한 표현
+  - **PlainNet: Conv, ReLU, Shortcut**
+  - Transformer 사용 X
+    - SOTA를 달성하는데 필수요소 X
+    - Depth-wise convolution이 더 간단한 표현
 - BatchNorm
-    - BatchNorm: small batch size에 취약
-    - InstanceNorm: manual한 tuning이 필요
-    - **LayerNorm: 다수의 SOTA에서 사용, 성능 향상과 학습 안정성에 기여**
-        - learning rate 10배 증가 가능
-        - +0.44dB on SSID, +3.39dB on GoPro
+  - BatchNorm: small batch size에 취약
+  - InstanceNorm: manual한 tuning이 필요
+  - **LayerNorm: 다수의 SOTA에서 사용, 성능 향상과 학습 안정성에 기여**
+    - learning rate 10배 증가 가능
+    - +0.44dB on SSID, +3.39dB on GoPro
 - Activation
-    - ReLU: 좋지만 SOTA에서 미미한 사용
-    - GELU: SOTA에서 많이 사용
-        - SSID에서 차이 X, +0.21dB on GoPro
+  - ReLU: 좋지만 SOTA에서 미미한 사용
+  - GELU: SOTA에서 많이 사용
+    - SSID에서 차이 X, +0.21dB on GoPro
 
 ### 결과
 
@@ -84,7 +84,7 @@ $$
 
 ## SimpleGate
 
-GELU에서 element-wise product으로 인해 non-linearity가 발생한다. 
+GELU에서 element-wise product으로 인해 non-linearity가 발생한다.
 따라서 sigmoid를 제거할 수 있다고 생각하였고 다음과 같은 simple gate function을 완성시킨다.
 
 $$
@@ -92,7 +92,6 @@ SimpleGate({X},{Y})=X \odot Y
 $$
 
 간단히 말하자면 channel을 반으로 쪼개어 element-wise product를 하였다.
-
 
 <p align="center">
     <img src="/assets/post/image/legacy/nafnet-sg.png" width="50%">
@@ -106,8 +105,8 @@ $$
 CA({X})={X}*\sigma(W_2max(0, W_1pool({X})))
 $$
 
-global average pooling을 이용하여 global한 feature를 aggretation하고 channel들간 상관관계를 계산하기 위해 linear layer를 추가한다. 
-이 때 CA는 channel-attention calculation을 하나의 함수 $$\psi$$로 간주하여  다음과 같이 재정의할 수 있다. 
+global average pooling을 이용하여 global한 feature를 aggretation하고 channel들간 상관관계를 계산하기 위해 linear layer를 추가한다.
+이 때 CA는 channel-attention calculation을 하나의 함수 $$\psi$$로 간주하여 다음과 같이 재정의할 수 있다.
 밑의 식에서 $$*$$는 channel-wise product이다.
 
 $$
