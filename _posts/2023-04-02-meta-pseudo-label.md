@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Meta Pseudo Labels"
-date:   2023-04-02 00:00:00 +0900
+title: "Meta Pseudo Labels"
+date: 2023-04-02 00:00:00 +0900
 description: SOTA cnn technique on imagenet
 categories: [semi-supervised-learning, paper]
 giscus_comments: true
@@ -14,11 +14,11 @@ related_posts: true
     <img src="/assets/post/image/legacy/mpl-psudo-label.png" width="50%">
 </p>
 
-Semi-supervised learning 방법은 여러가지 있는데 그 중에 한 가지는 psuedo labeling 방법이다. 
-Psudo labeling은 잘 학습된 teacher network와 student network가 존재하는데 
+Semi-supervised learning 방법은 여러가지 있는데 그 중에 한 가지는 psuedo labeling 방법이다.
+Psudo labeling은 잘 학습된 teacher network와 student network가 존재하는데
 teacher model은 unlabeled data의 psuedo label을 제작하고 student는 그 label을 학습하는 것으로 진행된다.
 
-하지만 이 방법의 문제점은 teacher model의 psuedo label이 정확하지 않다면 student model은 teacher model의 확증편향으로 인하여 잘못된 방향으로 학습을 진행한다. 
+하지만 이 방법의 문제점은 teacher model의 psuedo label이 정확하지 않다면 student model은 teacher model의 확증편향으로 인하여 잘못된 방향으로 학습을 진행한다.
 따라서 저자는 이러한 문제를 해결하기 위해 teacher model이 labeled data에 대한 student model의 성능을 확인하면서 bias를 수정하는 과정을 제안한다.
 
 # Meta Psuedo Label
@@ -48,6 +48,7 @@ Student의 optimal parameter는 teacher model이 제작한 psuedo-label과 stude
 $$
 \theta_S^{PL}=\underset{\theta_S}{\operatorname{argmin}} \mathbb{E}[CE(T(x_u;\theta_T), S(x_u;\theta_S)]
 
+
 $$
 
 un-labeled dataloss는 다음과 같이 정의할 수 있다.
@@ -62,7 +63,7 @@ $$
 \mathbb{E}_{x_l,y_l}[CE(y_l,S(x_l;\theta_S^{PL}))] := \mathcal{L}_l(\theta_S^{PL})
 $$
 
-이 때 student model은 teacher model의 psuedo-label을 이용하여 학습하기 때문에 성능은 teacher model에 의존적인 것을 알 수 있다. 
+이 때 student model은 teacher model의 psuedo-label을 이용하여 학습하기 때문에 성능은 teacher model에 의존적인 것을 알 수 있다.
 이러한 이유로 meta psudo label이라거 명명하였고 이를 나타내기 위해서 Notation을 다음과 같이 작성한다.
 
 $$
@@ -75,7 +76,7 @@ $$
 \mathcal{L}_l(\theta_S^{PL}) \rightarrow \mathcal{L}_l(\theta_S^{PL}(\theta_T))
 $$
 
-techer model은 확증편향을 수정하기 위해 $$\mathcal{L}_l(\theta_S^{PL}(\theta_T))$$을 이용하여 parameter를 update한다. 
+techer model은 확증편향을 수정하기 위해 $$\mathcal{L}_l(\theta_S^{PL}(\theta_T))$$을 이용하여 parameter를 update한다.
 하지만 이를 직접 계산하는 것은 힘들기 때문에 approximation을 한다.
 
 $$
@@ -119,14 +120,14 @@ Student는 오직 Meta Psuedo label로만 학습을 진행하였다. 이후에�
     <img src="/assets/post/image/legacy/mpl-two-moon.png" width="50%">
 </p>
 
-각각의 class마다 unlabled data 1000개씩, label data 3개씩 추출하였다. 
-Supervised 방법은 label data를 잘 분류하지만 다른 데이터는 오류를 보이고 있다. 
-Supervised 방법으로 학습 된 teacher model을 통하여 pseudo label을 만들었을때는 label data 조차 정확하게 판별을 못했다. 
+각각의 class마다 unlabled data 1000개씩, label data 3개씩 추출하였다.
+Supervised 방법은 label data를 잘 분류하지만 다른 데이터는 오류를 보이고 있다.
+Supervised 방법으로 학습 된 teacher model을 통하여 pseudo label을 만들었을때는 label data 조차 정확하게 판별을 못했다.
 하지만 Meta Psuedo Label에서는 정확하게 두 class를 분리하였다.
 
 ## Small Model
 
-EfficientNet과 같은 large model을 실험하기 전에 small model로 실험을 진항하였다. 
+EfficientNet과 같은 large model을 실험하기 전에 small model로 실험을 진항하였다.
 세 가지 dataset을 사용하였는데 CIFAR-10-4K, SVHN은 WideResNet28-2를 사용하였고 imagenet은 resnet50을 사용하였다.
 
 <p align="center">
@@ -147,7 +148,7 @@ ImageNet supervised learning에서 사용했던 기법들과 비교를 해보았
 
 ## ImageNet
 
-ImageNet을 labeled data, JFT를 unlabeled data로 사용하여 semi-supervised learning을 한 후 imagenet으로 finetuning한 결과 SOTA를 찍었고 
+ImageNet을 labeled data, JFT를 unlabeled data로 사용하여 semi-supervised learning을 한 후 imagenet으로 finetuning한 결과 SOTA를 찍었고
 supervised learning보다 성능이 좋았다.
 
 <p align="center">

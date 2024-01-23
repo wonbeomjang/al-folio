@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Proper Reuse of Image Classification Features Improves Object Detection"
-date:   2023-04-09 00:00:00 +0900
+title: "Proper Reuse of Image Classification Features Improves Object Detection"
+date: 2023-04-09 00:00:00 +0900
 description: Neck is important
 categories: [transfer-learning, object-detection]
 giscus_comments: true
@@ -42,7 +42,7 @@ related_posts: true
 - FPN, RPN, Detection Cascade 등은 network의 generalzation에 도움을 준다.
 - 해당 요소들의 capacity가 충분하면 backbone freezing이 fine-tuning과 training scratch보다 좋은 성능을 보인다.
 - Backbone pretraining시 classification dataset의 수가 많아질수록 성능이 높아진다.
-- 
+-
 
 **Data Augmentation**
 
@@ -94,7 +94,7 @@ pretraing과 fine-tuning의 관계를 알아보기위해 실험을 진행했다.
     <img src="/assets/post/image/proper-reuse-of-image-classification-features-improve-object-detection/Untitled%203.png" width="80%">
 </p>
 
-Backbone은 ImageNet에서 학습시켰다. 따라서 object detection과 domain gap이 발생하는데 이는 detector component가 해결할 수 있다. FPN을 사용할 경우  generalize하는데 capacity가 부족해 성능감소가 발생했다. 하지만 NAS-FPN과 Cascade head를 추가했을 때 성능에 이득이 있었다. 
+Backbone은 ImageNet에서 학습시켰다. 따라서 object detection과 domain gap이 발생하는데 이는 detector component가 해결할 수 있다. FPN을 사용할 경우 generalize하는데 capacity가 부족해 성능감소가 발생했다. 하지만 NAS-FPN과 Cascade head를 추가했을 때 성능에 이득이 있었다.
 
 <p align="center">
     <img src="/assets/post/image/proper-reuse-of-image-classification-features-improve-object-detection/Untitled%204.png" width="50%">

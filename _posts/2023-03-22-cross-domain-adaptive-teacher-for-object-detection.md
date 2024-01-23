@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Cross-Domain Adaptive Teacher for Object Detection"
-date:   2023-03-22 00:00:00 +0900
+title: "Cross-Domain Adaptive Teacher for Object Detection"
+date: 2023-03-22 00:00:00 +0900
 description: sota of cross domain DA in object detection
 categories: [domain-adaptation, paper]
 giscus_comments: true
@@ -11,8 +11,8 @@ related_posts: true
 # Intorduction
 
 데이터셋 중에서 label이 있는 데이터도 있지만 label이 없는 데이터도 있다.
-이 두개의 domain이 다를 경우 이를 다루는 것은 쉽지 않다. 
-이 논문은 object detection에서 source domain은 label이 있고 target domain은 label이 없는 상황에 
+이 두개의 domain이 다를 경우 이를 다루는 것은 쉽지 않다.
+이 논문은 object detection에서 source domain은 label이 있고 target domain은 label이 없는 상황에
 semi-supervised로 doamain adaptation을 하는 방법을 다루고 있다.
 
 # Adaptive teacher
@@ -46,7 +46,7 @@ semi-supervised로 doamain adaptation을 하는 방법을 다루고 있다.
 loss는 supervised loss, unsupervised loss, discrimination loss를 사용한다. Psuedo-label에서 사용하는 confidence threshol($$\delta$$)는 class의 confidence만 반영하고 bouding box의 confidence를 반영하지 않는다. 따라서 unsupervised loss에서는 class loss만을 사용한다.
 
 $$
-\mathcal{L}_{sup}(X_s, B_s, C_s)=\mathcal{L}_{cls}^{rpn}(X_s, B_s, C_s) +\mathcal{L}_{reg}^{rpn}(X_s, B_s, C_s) +\mathcal{L}_{cls}^{roi}(X_s, B_s, C_s) +\mathcal{L}_{reg}^{roi}(X_s, B_s, C_s)  
+\mathcal{L}_{sup}(X_s, B_s, C_s)=\mathcal{L}_{cls}^{rpn}(X_s, B_s, C_s) +\mathcal{L}_{reg}^{rpn}(X_s, B_s, C_s) +\mathcal{L}_{cls}^{roi}(X_s, B_s, C_s) +\mathcal{L}_{reg}^{roi}(X_s, B_s, C_s)
 $$
 
 $$

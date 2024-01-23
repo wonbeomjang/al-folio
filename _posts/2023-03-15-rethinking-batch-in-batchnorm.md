@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Rethinking “Batch” in BatchNorm"
-date:   2023-03-15 00:00:00 +0900
+title: "Rethinking “Batch” in BatchNorm"
+date: 2023-03-15 00:00:00 +0900
 description: Introduce the PreciseBN
 categories: [batch-normalization, paper]
 giscus_comments: true
@@ -9,8 +9,9 @@ related_posts: true
 ---
 
 # Intorduction
-BatchNorm은 layer의 중간에 들어가며 학습을 안정화하여 학습속도를 상승시키고 오버피팅을 방지한다. 
-하지만 train test domain이 많이 다르거나 batch size가 현저하게 작다면 batch norm은 문제를 일으키기도 한다. 
+
+BatchNorm은 layer의 중간에 들어가며 학습을 안정화하여 학습속도를 상승시키고 오버피팅을 방지한다.
+하지만 train test domain이 많이 다르거나 batch size가 현저하게 작다면 batch norm은 문제를 일으키기도 한다.
 따라서 이 논문에서는 BatchNorm의 함정을 정리하고 권장사항을 제시한다.
 
 ## BatchNorm
@@ -43,14 +44,13 @@ $$
 
 하지만 EMA는 이전에 사용한 값을 대부분 가져가 실제 평균, 분산을 늦게 반영한다. ($$\lambda$$는 보통 0.9로 설정한다.)
 
-
 <p align="center">
     <img src="/assets/post/image/legacy/precisebn_bn_plot.png" width="80%">
 </p>
 
 # PresizeBN
 
-따라서 저자는 PreciseBN을 제안했다. 
+따라서 저자는 PreciseBN을 제안했다.
 PresizeBN은 mini-batch마다 batch parameter를 update하지 않고 한 epoch이 끝나면 model을 freeze한 후 batch statistics를 aggregation을 하여 update한다.
 
 $$
@@ -61,8 +61,8 @@ $$
 
 ## Large Batch Size
 
-PreciseBN은 EMA보다 안정적이다. 저자는 먼저 batch size가 매우 클 경우에 대하여 실험했다. 
-EMA에서 batch size가 커지면 절대적인 update수가 적어져 validation error의 분산이 커진다. 
+PreciseBN은 EMA보다 안정적이다. 저자는 먼저 batch size가 매우 클 경우에 대하여 실험했다.
+EMA에서 batch size가 커지면 절대적인 update수가 적어져 validation error의 분산이 커진다.
 하지만 PreciseBN은 한 epoch이후에 update하기 때문에 분산이 커지는 일이 없었고 실험적으로 1k~10k의 sample을 aggregation을 하면 모수를 추정하기 충분했다.
 
 <p align="center">
@@ -78,7 +78,7 @@ EMA는 mini-batch만 볼 수 있기떄문에 batch size가 작을수록 성능�
     <img src="/assets/post/image/legacy/presize_bn_ema_result_with_NBS.png" width="50%">
 </p>
 
-EMA는 Batchsize가 작아질수록 train-test inconsisitency가 커진다. 
+EMA는 Batchsize가 작아질수록 train-test inconsisitency가 커진다.
 따라서 inference에 mini-batch statistic을 이용하면 성능하락이 줄어든다.
 
 <p align="center">
