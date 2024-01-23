@@ -15,6 +15,7 @@ on:
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
       - "!.github/workflows/deploy-image.yml"
+      - "!.github/workflows/docker-slim.yml"
       - "!.github/workflows/prettier.yml"
   pull_request:
     branches:
@@ -30,6 +31,7 @@ on:
       - "!.github/workflows/axe.yml"
       - "!.github/workflows/deploy-docker-tag.yml"
       - "!.github/workflows/deploy-image.yml"
+      - "!.github/workflows/docker-slim.yml"
       - "!.github/workflows/prettier.yml"
 
 jobs:
