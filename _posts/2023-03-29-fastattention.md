@@ -30,7 +30,7 @@ GPU는 병렬 연산 시 데이터를 HBM에서 가져온 후 SRAM에 올려놓�
 
 퍼포먼스를 고려할 때 연산량과 메모리 접근의 관점으로 두 가지를 나눌 수 있다.
 
-1. Compute-bound: 연산량이 메모리 접근보다 많은 경우이다. ex) MatMul  
+1. Compute-bound: 연산량이 메모리 접근보다 많은 경우이다. ex) MatMul
 2. Memory-bound: 메모리 접근이 연산량보다 많은 경우이다. ex) softmax, batchnorm
 
 ### Kernel fusion
