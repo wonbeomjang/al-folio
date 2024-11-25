@@ -18,10 +18,5 @@ social: false # includes social icons at the bottom of the page
 ---
 
 안녕하세요.
-개발을 좋아하는 컴퓨터비전 리서처&엔지니어 장원범입니다.
-
-그저 컴퓨터를 좋아하는 소년이 블록깨기 인공지능에 빠져 공부를 시작했고 전공과 관심사가 겹쳐져서 컴퓨터비전을 활용한 다양한 토이프로젝트를 하면 학창시절을 보냈습니다.
-
-데이터와 사용 디바이스를 이해하며 연구개발을 하자라는 것을 목표로하고 있으며 실제 사용할 수 있는 서비스를 만들기 위해 리서치와 개발을 둘 다 구분없이 역량을 키우고 있습니다.
-
-지금까지 object detection을 주로 다루었으며 관심사는 efficient AI, hardware optimization으로 공부하는 중입니다.
+SK텔레콤 LLM Research Engineer로 근무 중인 장원범입니다. 주로 LLM에 들어가는 데이터를 구축하고 LLM을 평가하는 업무를 진행하고 있습니다.
+LLM을 이용하여 LLM을 평가하는 LLM-as-a-Judge에 관심이 많으며, 현재 진행하는 업무를 기반으로 sLM을 활용한 개인화 LM을 연구하고싶습니다.
