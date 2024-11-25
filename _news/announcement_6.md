@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-[TelBench](https://aclanthology.org/2024.emnlp-industry.45.pdf) paper EMNLP industry track accept
+[TelBench](https://aclanthology.org/2024.emnlp-industry.45.pdf) is accepted by EMNLP 2024 industry track.

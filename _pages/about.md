@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Computer Vision Researcher and Engineer
+subtitle: LLM Research Engineer
 
 profile:
   align: right
