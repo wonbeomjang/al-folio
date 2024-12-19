@@ -1,112 +1,139 @@
----
-layout: post
-title: "Pretraining Data Detection for Large Language Models: A Divergence-based Calibration Method 설명"
-date: 2024-12-18 00:00:00 +0900
-description:
-categories: [paper, llm]
-tags: [paper, llm]
-giscus_comments: true
-related_posts: true
+# Pretraining Data Detection for Large Language Models: A Divergence-based Calibration Method
+
+생성일: 2024년 12월 11일  
+태그: paper  
+상태: 시작 전  
+
 ---
 
-# Introduction  
+## Introduction
 
-- 많은 model 개발자들은 LLM을 개발할 때 사용한 corpus를 비공개로 처리한다.  
-    - 저작권, 윤리적 문제가 존재하기 때문이다.  
-- 저자는 black-box LLM과 text가 주어졌을 때 해당 text가 training data에 포함되어있는지 확인하는 방법론을 제시한다.  
+많은 LLM(대규모 언어 모델) 개발자들은 사용된 학습 코퍼스를 비공개로 처리합니다. 이는 저작권과 윤리적 문제와 같은 이유 때문입니다. 이러한 상황에서 저자는 블랙박스 LLM과 텍스트가 주어졌을 때, 해당 텍스트가 학습 데이터에 포함되어 있는지 확인할 수 있는 방법론을 제시합니다.
 
-## 아이디어  
+## 아이디어
 
-- Divergence-from-randomness에서 영감을 받는다.  
-- ***특정 단어가 한 문서 내에서 사용되는 빈도(Within-document term-frequency)***와 ***그 단어가 전체 문서 컬렉션 내에서 사용되는 빈도(frequency of a word within the collection)***가 얼마나 차이가 나는지를 측정하면, 그 단어가 해당 문서에서 얼마나 중요한 정보를 담고 있는지 알 수 있다.  
-    - Within-document term-frequency  
-        - LLM predicted token의 probability  
-        - Token probability distribution  
-    - Frequency of a word within the collection  
-        - Corpus에서 해당 token의 빈도수  
-        - Token frequency distribution  
-- Token probability distribution와 Token frequency distribution의 divergence가 높으면 해당 text가 모델의 training corpus에 있다는 의미다.  
-
-## 방법론  
+이 연구는 **Divergence-from-randomness**에서 영감을 받았습니다. 특정 단어의 **문서 내 사용 빈도(Within-document term-frequency)**와 **전체 문서 컬렉션 내 사용 빈도(frequency of a word within the collection)** 간 차이를 측정함으로써 해당 단어가 문서에서 얼마나 중요한 정보를 담고 있는지 알 수 있다는 개념입니다. 이를 기반으로 다음과 같은 측정 방법이 제안되었습니다:
 
 1. **Within-document term-frequency**  
-    - 특정 text에서 probability distribution을 계산한다.  
-2. **Frequency within the collection**  
-    - 전체 corpus에서 해당 token이 평균적으로 얼마나 자주 등장하는지를 나타낸다.  
-3. **Divergence**  
-    - Within-document term-frequency와 Frequency within the collection을 비교한다.  
+   - LLM이 예측한 토큰의 확률로 계산됩니다.  
+   - 이는 토큰 확률 분포(Token probability distribution)를 의미합니다.
 
-# Problem Statement  
+2. **Frequency of a word within the collection**  
+   - 코퍼스에서 해당 토큰의 평균 등장 빈도를 나타냅니다.  
+   - 이는 토큰 빈도 분포(Token frequency distribution)로 정의됩니다.
 
-- Text $$x$$, LLM $$\mathcal{M}$$, 정보가 없는 pretraining corpus $$D$$, pretraining data detection task $$A$$에 대해서  
-    - $$\mathcal{A}(x,\mathcal{M})\rightarrow\{0,1\}$$  
+토큰 확률 분포와 토큰 빈도 분포 간의 **Divergence**가 높다면, 해당 텍스트가 모델의 학습 코퍼스에 포함되었을 가능성을 나타냅니다.
 
-<p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image.png" width="80%"></p>
+---
 
-1. Token probability distribution computation  
-    - $$\mathcal{M}$$에 텍스트 $$x$$를 query하여 각 token probability를 계산한다.  
-2. Token probability distribution computation  
-    - 접근 가능한 대규모 참조 말뭉치 $$\mathcal{D}^\prime$$를 사용하여 토큰 빈도를 추정한다.  
-3. Score calculation via *comparison*  
-    - 두 분포를 비교하여 각 token의 probability을 calibration하고, calibration된 probability를 기반으로 pretraining data인지 판별하는 점수를 계산한다.  
-4. Binary decision  
-    - Score에 threshold를 적용하여 $$x$$가 모델 $$\mathcal{M}$$의 pretraining corpus에 있는지 예측한다.  
+## 방법론
 
-## 3.2 Token Probability Distribution Computation  
+### 문제 정의
 
-- $$x_0$$: start-of-sentence token  
+텍스트 $$x$$, LLM $$\mathcal{M}$$, 정보가 없는 학습 코퍼스 $$D$$, 학습 데이터 검출 과제 $$\mathcal{A}$$에 대해 다음을 정의합니다:  
+
+$$\mathcal{A}(x,\mathcal{M})\rightarrow\{0,1\}$$  
+
+1. **Token Probability Distribution Computation**  
+   - LLM $$\mathcal{M}$$에 텍스트 $$x$$를 질의하여 각 토큰 확률을 계산합니다.
+
+2. **Token Frequency Distribution Computation**  
+   - 접근 가능한 대규모 참조 코퍼스 $$\mathcal{D}^\prime$$를 사용하여 토큰 빈도를 추정합니다.
+
+3. **Score Calculation via Comparison**  
+   - 두 분포를 비교하여 각 토큰의 확률을 조정(calibration)하고, 이를 기반으로 학습 데이터 여부를 판단할 점수를 계산합니다.
+
+4. **Binary Decision**  
+   - 점수에 임계값을 적용하여 $$x$$가 모델 $$\mathcal{M}$$의 학습 코퍼스에 포함되어 있는지 예측합니다.
+
+---
+
+### 세부 절차
+
+#### Token Probability Distribution Computation
+
+시작 토큰 $$x_0$$를 포함하여 텍스트 $$x$$는 다음과 같이 정의됩니다:  
 
 $$x^\prime=x_0x_1x_2...x_n$$  
 
-- $$\mathcal{M}$$에 $$x$$를 query한다.  
+$$\mathcal{M}$$에 $$x$$를 질의하여 다음을 계산합니다:  
 
-$$\{p(x_i|x_{\lt i};\mathcal{M}):0\lt i \le n \}$$  
+$$\{p(x_i|x_{< i};\mathcal{M}): 0 < i \le n\}$$  
 
-## 3.3 Frequency of a word within the collection  
+#### Frequency of a Word within the Collection
 
-- 다음의 term으로 계산한다.  
+참조 코퍼스 $$\mathcal{D}^\prime$$에서 특정 토큰 $$x_i$$의 빈도는 다음과 같이 계산됩니다:  
 
-$$p(x_i,\mathcal{D}^\prime)=\frac{\text{count}(x_i)}{N^\prime}$$  
+$$p(x_i, \mathcal{D}^\prime) = \frac{\text{count}(x_i)}{N^\prime}$$  
 
-- $$x_i$$가 없는 경우를 위해 Laplace smoothing을 추가한다. $$|V|$$는 vocabulary size다.  
+만약 $$x_i$$가 코퍼스에 존재하지 않는 경우, 라플라스 스무딩(Laplace Smoothing)을 적용합니다:  
 
-$$p(x_i;D^\prime)=\frac{\text{count}(x_i)+1}{N^\prime+|V|}$$  
+$$p(x_i; D^\prime) = \frac{\text{count}(x_i) + 1}{N^\prime + |V|}$$  
 
-## 3.4 Score Calculation through Compression  
+여기서 $$|V|$$는 어휘(vocabulary) 크기입니다.
 
-- $$p(x_i;\mathcal{M})$$과 $$p(x_i;D^\prime)$$의 cross-entropy를 계산한다.  
+#### Score Calculation through Compression
+
+토큰 확률 $$p(x_i;\mathcal{M})$$와 참조 코퍼스 확률 $$p(x_i;D^\prime)$$ 간의 크로스 엔트로피(Cross-Entropy)는 다음과 같이 계산됩니다:  
 
 $$\alpha_i = -p(x_i; \mathcal{M}) \cdot \log p(x_i; D^\prime).$$  
 
-- 특정 token이 우세한 영향을 미치지 않도록 upper bound를 정의한다.  
+특정 토큰이 우세한 영향을 미치지 않도록 상한선을 정의합니다:  
 
-$$  
-\begin{equation}  
-\alpha_i =  
-\begin{cases}  
-\alpha_i, & \text{if } \alpha_i < a \\  
-a, & \text{if } \alpha_i \geq a  
-\end{cases}  
-\end{equation}  
+$$
+\alpha_i =
+\begin{cases} 
+\alpha_i, & \text{if } \alpha_i < a \\
+a, & \text{if } \alpha_i \geq a
+\end{cases}
 $$  
 
-- Text $$x$$에 대해서 token $$x_i$$가 여러 개 존재할 수 있다.  
-    - 이럴 때는 첫 번째 토큰의 결과를 가져온다.  
+텍스트 $$x$$에서 여러 토큰 $$x_i$$가 존재할 때, 평균을 계산하여 최종 점수를 구합니다:  
 
-$$\beta=\frac{1}{|\text{FOS}(x)|}\sum_{x_j \in \text{FOS(x)}}\alpha_j$$  
+$$\beta = \frac{1}{|\text{FOS}(x)|} \sum_{x_j \in \text{FOS}(x)} \alpha_j$$  
+
+#### Binary Decision
+
+최종적으로 점수 $$\beta$$에 임계값 $$\tau$$를 적용하여 학습 코퍼스 포함 여부를 판단합니다:  
+
+$$
+\text{Decision}(x, \mathcal{M}) =
+\begin{cases} 
+0 \quad (x \notin \mathcal{D}), & \text{if } \beta < \tau, \\
+1 \quad (x \in \mathcal{D}), & \text{if } \beta \geq \tau.
+\end{cases}
+$$  
+
+---
+
+## Experimental Results
+
+### Main Result
+
+Wiki 데이터를 기반으로 한 실험 결과는 아래와 같습니다:  
 
 <p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image%201.png" width="80%"></p>
 
-## 3.5 Binary Decision  
+---
 
-- Threshold로 pretraining corpus $$D$$에 있는지 결정  
+### Ablation Studies
 
-$$  
-\text{Decision}(x, \mathcal{M}) =  
-\begin{cases}  
-0 \quad (x \notin \mathcal{D}), & \text{if } \beta < \tau, \\  
-1 \quad (x \in \mathcal{D}), & \text{if } \beta \geq \tau.  
-\end{cases}  
-$$  
+다양한 설정에서 실험한 결과는 다음과 같습니다:  
 
 <p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image%202.png" width="80%"></p>
+<p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image%203.png" width="80%"></p>
+
+#### Baselines  
+- **CLD**: Baseline  
+- **+LUP**: Upper Bound 추가  
+- **+SFO**: 동적 Threshold 적용  
+
+#### Reference Corpus  
+참조 코퍼스로 무엇을 사용하더라도 결과에는 큰 차이가 없음을 보여줍니다:  
+
+<p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image%204.png" width="80%"></p>
+
+#### Upper Bound  
+Upper Bound는 각 토큰에 대해 다르게 적용해야 합니다:  
+
+<p align="center"><img src="/assets/post/image/2024-12-19-pretraining-data-dection-for-large-language-models/image%205.png" width="80%"></p>
