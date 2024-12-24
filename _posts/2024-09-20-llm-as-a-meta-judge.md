@@ -11,78 +11,77 @@ related_posts: true
 
 # Introduction
 
-InstructGPT가 성공한 이후로 LLM의 instruction following 능력은 중요하다는 것을 알게 되었다.
-따라서 SFT나 preference optimization(RLHF, DPO, PPO, KPO, ...)을 통해 human alignment를 높이려고 했다.
-하지만 이와 같은 방법들은 많은 시간과 돈이 소요된다는 단점이 있다.
+InstructGPT의 성공 이후, LLM의 instruction following 능력은 매우 중요한 요소로 자리 잡았다.  
+이를 개선하기 위해 SFT, preference optimization(RLHF, DPO, PPO, KPO 등)과 같은 방법들이 사용되었으나, 이러한 방식들은 많은 시간과 비용이 소요된다는 한계가 있다.
 
-따라서 Self-Reward라는 방법이 제시되었다. 이 방법론은 하나의 LLM이 Actor, Judge 두 가지 역할을 수행하면서 자체적으로 preference optimization을 수행한다.
+이를 해결하기 위해 Self-Reward 방법론이 제시되었다. 이 접근법에서는 하나의 LLM이 Actor와 Judge 두 가지 역할을 수행하며 자체적으로 preference optimization을 수행한다.
 
-- Actor: Specific instruction에 대한 response를 생성한다.
-- Judge: Actor가 생성한 response를 LLM-as-a-Judge 방식으로 수행하여 reward가 되는 preference pair를 생성한다.  
-  하지만 이와 같은 방법도 Actor가 좋은 response를 생성하는 데만 관심이 있고, judge의 성능에는 관심이 없다는 것에 대한 단점이 있다.
+- **Actor**: 주어진 instruction에 대한 response를 생성.
+- **Judge**: Actor가 생성한 response를 평가하며, LLM-as-a-Judge 방식을 활용해 reward가 되는 preference pair를 생성.  
+  하지만 기존 방식은 Actor가 좋은 response를 생성하는 데만 초점이 맞춰져 있어 Judge의 성능에는 관심을 두지 않는다는 한계가 있다.
 
-따라서 저자는 Judge의 성능을 높이기 위해서 LLM-as-a-Meta-Judge를 제안했다.
-핵심 아이디어는 하나의 LLM이 Actor, Judge뿐만 아니라 Meta-Judge 역할도 수행한다는 것이다.
-이를 통해 모델의 judge 능력에 대한 reward를 줄 수 있다.
+이 문제를 해결하기 위해 저자는 **LLM-as-a-Meta-Judge**를 제안했다.  
+이 방법론의 핵심은 LLM이 Actor와 Judge 역할뿐만 아니라 Meta-Judge 역할까지 수행하도록 하여 Judge 능력에 대한 추가적인 reward를 제공하는 것이다.
+
+---
 
 # Meta-Rewarding
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/fig1.png" width="80%"></p>
 
-Meta Rewarding은 response를 생성하는 actor, response를 평가하는 judge, 그리고 judge를 평가하는 meta-judge로 구성된다.
+Meta-Rewarding은 세 가지 주요 구성 요소로 이루어진다:
 
-**Actor**  
-Actor는 각각의 instruction에 대하여 다수의 response를 생성한다.
+- **Actor**: 주어진 instruction에 대해 다수의 response를 생성.
+- **Judge**: LLM-as-a-Judge 프롬프트를 통해 각 response를 평가하고 score를 생성.  
+  이 score는 Actor를 학습시키는 preference pair로 사용된다.
+- **Meta-Judge**: 여러 Judge를 평가해 가장 적합한 Judge를 선택.  
+  여기서는 LLM-as-a-Meta-Judge 프롬프트를 활용해 결과를 생성하고, 이를 Judge 학습용 preference pair로 사용한다.
 
-**Judge**  
-Judge는 LLM-as-a-Judge 프롬프트로 각 response에 대해 score가 포함된 judge를 생성한다.
-여기서 생성된 score는 actor를 학습시키기 위한 preference pair가 된다.
-
-**Meta-Judge**  
-하나의 response에 대하여 여러 가지의 judge를 뽑아 어떤 judge가 좋은지 판단한다.
-LLM-as-a-Meta-Judge prompt가 사용되고, 여기서 생성된 결과는 judge를 학습시키기 위한 preference pair가 된다.
+---
 
 ## Actor Preference Dataset Creation
 
 ### 1. Sample Responses from Actor
 
-Iteration $$t$$일 때 현재 모델 $$M_t$$를 이용하여 $$K$$개의 response를 생성한다.
+Iteration $$t$$에서 현재 모델 $$M_t$$를 사용하여 $$K$$개의 response를 생성.
 
-$$\{y_1,...,y_{K}\}$$
+$$\{y_1, ..., y_{K}\}$$
 
 ### 2. Aggregate Multiple Judgements
 
-각 response $$y_k$$에 대하여 N개의 서로 다른 judge를 생성한다.
-5점 scale로 평가하되 parsing이 되지 않으면 drop한다.
+각 response $$y_k$$에 대해 N개의 서로 다른 Judge를 생성하며, 5점 척도로 평가.  
+만약 parsing이 불가능한 경우 해당 데이터를 제외(drop).
 
-$$\{j_k^1,...,j_k^N\}$$
+$$\{j_k^1, ..., j_k^N\}$$
 
 ### 3. Preference Data Selection with Length-Control
 
-가장 높은 점수 $$S_{\text{max}}$$를 가진 $$y_c$$, 가장 낮은 점수 $$S_{\text{min}}$$을 가진 $$y_r$$를 선택한다.
-단, 해당 response를 그대로 쓰지 않고, length control을 통해 길이 조정을 한다.
+- 최고 점수 $$S_{\text{max}}$$의 response $$y_c$$와 최저 점수 $$S_{\text{min}}$$의 response $$y_r$$를 선택.
+- 길이 조정을 통해 response quality를 일정 수준 이상 유지.
+- 점수 범위 내 비슷한 quality는 제외(drop).
 
-$$[(1 - \rho) S_{\text{max}} + \rho S_{\text{min}}, S_{\text{max}}]$$
-
-위 식 안에 점수가 들어가면 비슷한 quality로 판단하여 drop한다. 그리고 최대한 짧은 답변을 고르려고 노력했다.
+---
 
 ## Judge Preference Data Creation
 
 ### 1. Responses Selection
 
-모든 데이터를 활용하는 것은 비효율적이다. 따라서 학습 효율을 위해 judge confidence가 가장 낮은 데이터에 집중한다.
-따라서 하나의 instruction에 대해 response score의 variance가 가장 높은 데이터부터 시작한다.
+- 모든 데이터를 사용하는 것은 비효율적이므로, judge confidence가 낮은 데이터를 우선 선택.  
+- instruction에 대한 response score의 분산(variance)이 가장 높은 데이터를 활용.
 
-## 2. Pairwise Meta-Judge Evaluation
+### 2. Pairwise Meta-Judge Evaluation
 
-$$\{j^1, ..., j^N\}$$에서 두 가지 judgement를 뽑아 $$(j^m, j^n)$$을 구성하고 LLM-as-a-Meta-Judge를 수행한다.
-이때 position bias를 해결하기 위해 두 judge의 순서를 바꿔서 다시 수행한다.
-그리고 만약 결과가 같으면 accept하고, 결과가 다르면 reject한다.
-또한 first position과 second position의 가중치를 계산하여 보정했다.
+- $$\{j^1, ..., j^N\}$$에서 두 개의 judgement를 선택해 $$(j^m, j^n)$$ 구성.  
+- 두 judge 순서를 바꿔 평가하여 position bias를 해결.
+- 평가 결과가 같으면 accept, 다르면 reject.  
 
-$$\omega_{1} = \frac{\text{win}_{\text{2nd}}}{\text{win}_{\text{1nd}} + \text{win}_{\text{2nd}}}, \text{  } \omega_{2} = \frac{\text{win}_{\text{1nd}}}{\text{win}_{\text{1nd}} + \text{win}_{\text{2nd}}}$$
+Position별 가중치 계산:
 
-그리고 각 judge 결과를 이용하여 battle result를 만든다.
+$$
+\omega_{1} = \frac{\text{win}_{\text{2nd}}}{\text{win}_{\text{1nd}} + \text{win}_{\text{2nd}}}, \text{  } \omega_{2} = \frac{\text{win}_{\text{1nd}}}{\text{win}_{\text{1nd}} + \text{win}_{\text{2nd}}}
+$$
+
+Meta-Judge 결과로 battle result 계산:
 
 $$
 r_{mn} = \begin{cases}
@@ -92,74 +91,78 @@ r_{mn} = \begin{cases}
 \end{cases}
 $$
 
-$$B_{mn} = \omega_1 \mathbb{1}[r^{mn} = 1] + \omega_2 \mathbb{1}[r^{nm} = -1]$$
-
-## 3. Elo Score and Pair Selection
-
-이후에 Elo score를 계산하여 reward를 구한다.
-
 $$
-\arg\max_{\varepsilon} \sum_{m,n} B_{mn} \log \left( \frac{e^{\varepsilon_m - \varepsilon_n}}{1 + e^{\varepsilon_m - \varepsilon_n}} \right).
+B_{mn} = \omega_1 \mathbb{1}[r^{mn} = 1] + \omega_2 \mathbb{1}[r^{nm} = -1]
 $$
 
-이때도 judge의 length가 너무 길어지면 reject한다.
+### 3. Elo Score and Pair Selection
+
+- Elo score를 통해 judge의 reward 계산.
+
+---
 
 # Experiments
 
 ## Experiment Set-up
 
-각 Iteration마다 학습 방법을 바꾼다.
+Iteration마다 학습 방법을 달리하여 Meta-Rewarding 효과를 평가.
 
-> Iter 1 Obtain $$ M_1 $$ by training using DPO (initialized from the SFT model) on both actor and judge preference pairs generated by the SFT model.  
-> Iter 2 Obtain $$ M_2 $$ by training $$ M_1 $$ using DPO on actor and judge preference pairs generated by $$ M_1 $$.  
-Iter 3 Obtain $$ M_3 $$ by training $$ M_2 $$ using DPO exclusively on actor preference pairs generated by $$ M_2 $$.  
-Iter 4 Obtain $$ M_4 $$ by training $$ M_3 $$ using DPO exclusively on actor preference pairs generated by $$ M_3 $$.
+- **Iter 1**: SFT 모델에서 시작해 DPO를 통해 Actor와 Judge preference pair를 학습하여 $$M_1$$ 생성.
+- **Iter 2**: $$M_1$$을 기반으로 Actor와 Judge preference pair를 학습하여 $$M_2$$ 생성.
+- **Iter 3**: $$M_2$$에서 Actor preference pair만 학습하여 $$M_3$$ 생성.
+- **Iter 4**: $$M_3$$에서 Actor preference pair만 학습하여 $$M_4$$ 생성.
+
+---
 
 ## Instruction Following Evaluation
 
-### Meta-Rewarding iterations significantly improves the win rate
+### Meta-Rewarding iterations significantly improve the win rate
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/fig3.png" width="80%"></p>
 
-저자는 Length Control win rate에서 좋은 성능을 보인다고 했다.
+Meta-Rewarding은 특히 Length Control 조건에서 높은 성능을 보임.
 
-### The meta-judge and length-control mechanism are important.
+### The meta-judge and length-control mechanism are important
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table1.png" width="80%"></p>
 
-Table 1에서 볼 수 있듯, average lengths는 iteration에 따라 증가하지 않는다는 것을 보이고 있다.
+Table 1에 따르면, iteration이 진행됨에 따라 평균 길이가 증가하지 않음을 확인.
 
-### Meta-Rewarding improves nearly all instruction categories.
+### Meta-Rewarding improves nearly all instruction categories
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/fig4.png" width="80%"></p>
 
-Fig4에서 볼 수 있듯 거의 모든 카테고리에서 성능 향상이 일어났다.
+거의 모든 카테고리에서 성능 향상 확인.
 
-### Meta-Rewarding improves answering of complex and hard questions.
+### Meta-Rewarding enhances responses to complex and hard questions
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table2.png" width="80%"></p>
 
-Arena-hard에서도 좋은 성능을 보였다.
+복잡한 질문(arena-hard)에 대해서도 높은 성능 보임.
 
-### Meta-Rewarding does not sacrifice multi-turn ability despite training only on single-turn
+### Meta-Rewarding does not sacrifice multi-turn ability
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table6.png" width="80%"></p>
 
-Single-turn으로만 학습했음에도 불구하고 multi-turn의 성능을 떨어뜨리지 않았다.
+Single-turn 데이터만으로 학습했음에도 multi-turn 성능 유지.
+
+---
 
 ## Reward Modeling Evaluation
 
-### The model improves in judging after performing judge training
+### The model improves in judging after judge training
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table3.png" width="80%"></p>
 
-Meta-Rewarding 방법은 GPT-4와의 judge 상관관계를 높여주는 것으로 나왔다.
+Meta-Rewarding은 GPT-4와의 judge 상관관계를 개선.
 
-### Meta-Rewarding training improve judging correlation with Human
+### Meta-Rewarding improves human judge correlation
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table7.png" width="80%"></p>
 
-Meta-Rewarding 방법은 사람과의 judge 상관관계를 높여주는 것으로 나왔다.
+사람과의 judge 상관관계 역시 개선.
+
+---
 
 ## Ablations and Analysis
 
@@ -167,22 +170,23 @@ Meta-Rewarding 방법은 사람과의 judge 상관관계를 높여주는 것으�
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table4.png" width="80%"></p>
 
-Length control을 안 썼을 때 verbosity가 발생하는 것을 보였다.
+Length Control이 없으면 verbosity 증가.
 
 ### Meta-Judge Biases
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/table5.png" width="80%"></p>
 
-Meta-Rewarding 방법은 높은 점수를 준 judge를 선호하는 것으로 나왔다.
+높은 점수를 준 judge를 선호하는 경향 발견.
 
 ### Judge Scoring Shift
 
 <p align="center"><img src="/assets/post/image/llm-as-a-meta-judge/fig5.png" width="80%"></p>
 
-위의 문제를 보기 위해 Gaussian kernel density estimation을 이용해서 score의 분포를 보았다.
-이는 score-bias로 학습하는 동안 score 분포를 5점에 가까운 분포로 바꾸게 되었다.
+Score 분포가 학습 중 5점으로 집중됨(score-bias).
+
+---
 
 ### Limitations
 
-Judge 모델이 판단할 때 적은 quality 차이는 tie를 주는 경향이 있으므로 평균낼 때 주의해야 한다.  
-또한 meta-judge에서 bias가 있다.
+- Judge 모델이 적은 quality 차이를 tie로 판단하는 경향 있음.
+- Meta-Judge에서 bias가 존재.
