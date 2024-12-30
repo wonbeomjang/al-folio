@@ -66,14 +66,14 @@ $$\{j_k^1, ..., j_k^N\}$$
 
 ### 1. Responses Selection
 
-- 모든 데이터를 사용하는 것은 비효율적이므로, judge confidence가 낮은 데이터를 우선 선택.  
+- 모든 데이터를 사용하는 것은 비효율적이므로, judge confidence가 낮은 데이터를 우선 선택.
 - instruction에 대한 response score의 분산(variance)이 가장 높은 데이터를 활용.
 
 ### 2. Pairwise Meta-Judge Evaluation
 
-- $$\{j^1, ..., j^N\}$$에서 두 개의 judgement를 선택해 $$(j^m, j^n)$$ 구성.  
+- $$\{j^1, ..., j^N\}$$에서 두 개의 judgement를 선택해 $$(j^m, j^n)$$ 구성.
 - 두 judge 순서를 바꿔 평가하여 position bias를 해결.
-- 평가 결과가 같으면 accept, 다르면 reject.  
+- 평가 결과가 같으면 accept, 다르면 reject.
 
 Position별 가중치 계산:
 
